@@ -1,0 +1,2300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="KettlebellPink" />
+<meta name="apple-mobile-web-app-title" content="KettlebellPink" />
+<meta name="application-name" content="KettlebellPink" />
+<meta name="description" content="32:00 Full-Body Pink Kettlebell Workout & Guided Timer" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="theme-color" content="#FFE4F0" />
+<meta name="color-scheme" content="light" />
+<title>KettlebellPink</title>
+<link id="appleTouchIcon" rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<link id="pwaManifest" rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root{--ink:#2A1330;--mute:#8B6F90;--ac:#EC4899;--ac2:#F472B6;--tint:#FFD9EA;--card:rgba(255,255,255,.82);--st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px)}
+body[data-t=warmup]{--ac:#D946EF;--ac2:#F0ABFC;--tint:#F8DAFB}
+body[data-t=rest]{--ac:#10B981;--ac2:#6EE7B7;--tint:#D7F7E8}
+body[data-t=cooldown]{--ac:#C084FC;--ac2:#D8B4FE;--tint:#EEDFFF}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+html,body{margin:0;min-height:100%;background:#FFF3F8;color:var(--ink);font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'SF Pro Rounded',sans-serif;overscroll-behavior:none;touch-action:manipulation}
+body{min-height:100dvh;overflow-x:hidden}
+.hidden{display:none!important}
+.blob{position:fixed;border-radius:50%;filter:blur(60px);opacity:.75;background:var(--tint);transition:background-color .8s;z-index:0;pointer-events:none}
+.b1{width:320px;height:320px;top:-90px;right:-110px}.b2{width:300px;height:300px;bottom:60px;left:-130px;opacity:.5}
+.app{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:calc(var(--st) + 10px) 14px calc(var(--sb) + 118px);display:flex;flex-direction:column;gap:12px}
+header{display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{width:42px;height:42px;border-radius:15px;background:linear-gradient(135deg,#FB7185,#EC4899 60%,#D946EF);display:grid;place-items:center;color:#fff;box-shadow:0 8px 18px -6px rgba(236,72,153,.6)}
+h1{margin:0;font-size:17px;font-weight:800;letter-spacing:-.02em;line-height:1.1}h1 b{color:var(--ac);transition:color .5s}
+.sub{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--mute);margin-top:2px}
+.sub strong{color:var(--ink);font-variant-numeric:tabular-nums}
+#wakeBadge{display:inline-flex;align-items:center}#wakeText{display:none}.sub{white-space:nowrap}
+#wakeBadge i{width:8px;height:8px;border-radius:50%;background:#10B981;animation:blink 2s infinite}
+@keyframes blink{50%{opacity:.35}}
+.tools{display:flex;gap:7px}
+.ib{width:44px;height:44px;border-radius:14px;border:1px solid rgba(255,255,255,.9);background:var(--card);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:grid;place-items:center;color:var(--ac);box-shadow:0 6px 16px -8px rgba(120,30,90,.35);transition:transform .15s}
+.ib:active,.dk:active,.go:active{transform:scale(.93)}
+.ib.plan{width:auto;padding:0 12px;gap:6px;display:flex;align-items:center;font:800 12px 'Plus Jakarta Sans',sans-serif}
+.ib svg{width:17px;height:17px}.ib.plan svg{width:15px;height:15px}
+.ib.wk{width:auto;padding:0 10px;gap:5px;display:flex;align-items:center;font:800 11.5px 'Plus Jakarta Sans',sans-serif}
+.ib.wk b{display:inline-grid;place-items:center;min-width:17px;height:17px;padding:0 4px;border-radius:99px;background:var(--ac);color:#fff;font-size:10px}
+button{font-family:inherit;cursor:pointer;border:0;background:none;padding:0;color:inherit}
+.track{height:7px;border-radius:99px;background:rgba(255,255,255,.75);overflow:hidden;box-shadow:inset 0 1px 2px rgba(120,30,90,.12)}
+#overallProgressBar{height:100%;border-radius:99px;background:linear-gradient(90deg,#FB7185,#EC4899,#D946EF);transition:width .3s}
+.journey{display:flex;gap:6px}
+.jc{flex:1;text-align:center;font-size:9.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:6px 0;border-radius:11px;background:rgba(255,255,255,.55);color:var(--mute);transition:all .4s}
+.jc.done{background:rgba(255,255,255,.9);color:var(--ac)}
+.jc.on{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;box-shadow:0 8px 16px -8px var(--ac)}
+.meta{display:flex;justify-content:space-between;align-items:center;gap:8px}
+#phaseBadge{font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--ac);transition:color .5s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#stepCounter{font-size:11px;font-weight:700;color:var(--mute);white-space:nowrap}
+.card{background:var(--card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.95);border-radius:30px;padding:14px;box-shadow:0 24px 50px -24px rgba(150,30,100,.38),0 2px 0 rgba(255,255,255,.8) inset;display:flex;flex-direction:column;align-items:center}
+.badges{width:100%;display:flex;justify-content:space-between;gap:8px}
+#bellBadge{display:inline-flex;align-items:center;gap:7px;padding:7px 12px 7px 8px;border-radius:99px;font-size:11px;font-weight:800;color:#fff;background:linear-gradient(135deg,#FB7185,#EC4899);box-shadow:0 8px 16px -8px #EC4899}
+#bellBadge[data-k=rest]{background:linear-gradient(135deg,#34D399,#10B981);box-shadow:0 8px 16px -8px #10B981}
+#bellBadge[data-k=bw]{background:linear-gradient(135deg,#C084FC,#8B5CF6);box-shadow:0 8px 16px -8px #8B5CF6}
+#bellBadge[data-k="6kg"]{background:linear-gradient(135deg,#F9A8D4,#F472B6)}
+#bellBadge[data-swap="1"]{background:linear-gradient(135deg,#F59E0B,#EC4899);box-shadow:0 8px 18px -6px #F59E0B;animation:swapPulse .85s ease-in-out infinite alternate}
+@keyframes swapPulse{to{transform:scale(1.05)}}
+#bellBadge svg{width:18px;height:18px}
+.rep{padding:7px 12px;border-radius:99px;background:#fff;border:1px solid rgba(0,0,0,.05);font-size:11px;font-weight:800;color:var(--ac);transition:color .5s}
+h2{margin:12px 0 2px;font-size:21px;line-height:1.15;font-weight:800;letter-spacing:-.025em;text-align:center}
+#exerciseTitle{transition:opacity .18s ease-out}
+#setVariationLabel{margin:0;font-size:12px;font-weight:700;color:var(--ac);text-align:center;transition:color .5s,opacity .18s ease-out}
+.pop{animation:pop .45s cubic-bezier(.2,1.3,.4,1)}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.97)}}
+.stage{position:relative;width:100%;margin-top:10px;border-radius:24px;overflow:hidden;background:#FFE7F1;box-shadow:inset 0 0 0 1px rgba(255,255,255,.9),0 10px 24px -14px rgba(150,30,100,.45)}
+.stage svg{display:block;overflow:visible;width:100%;height:min(31dvh,255px);transition:opacity .18s ease-out}
+#fig{transition:opacity .18s ease-out}
+#tempoPill{position:absolute;top:10px;right:10px;padding:5px 10px;border-radius:99px;background:rgba(255,255,255,.88);backdrop-filter:blur(8px);font-size:10px;font-weight:800;color:var(--ac);display:inline-flex;align-items:center;gap:6px}
+.tdot{width:7px;height:7px;border-radius:50%;background:var(--ac);flex:none;animation:tpulse var(--td,4s) ease-in-out infinite}
+.paused .tdot{animation-play-state:paused;opacity:.5}
+@keyframes tpulse{0%,100%{transform:scale(.75);opacity:.45}50%{transform:scale(1.35);opacity:1}}
+body[data-t=rest] .tdot{animation-name:tbreathe;animation-duration:calc(var(--td,4s) * 1.4)}
+@keyframes tbreathe{0%,100%{transform:scale(.82);opacity:.5}50%{transform:scale(1.2);opacity:.9}}
+.ringwrap{position:relative;width:110px;height:110px;margin-top:-22px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 14px 28px -10px var(--ac),0 0 0 6px rgba(255,255,255,.7)}
+#pulseAura{position:absolute;inset:-2px;border-radius:50%;background:var(--ac);opacity:.18;animation:aura 2.4s ease-in-out infinite}
+body[data-t=rest] #pulseAura{animation-duration:3.6s}
+@keyframes aura{50%{transform:scale(1.14);opacity:0}}
+.paused #pulseAura{animation-play-state:paused;opacity:0}
+.ringwrap svg{width:98px;height:98px;transform:rotate(-90deg);position:relative}
+#timerRing{transition:stroke-dashoffset .25s linear}
+.ringwrap[data-w="1"]{animation:warn .5s ease-in-out infinite alternate}
+@keyframes warn{to{transform:scale(1.07)}}
+.tc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#timerDisplay{font-size:28px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums;line-height:1;transition:color .2s}
+.ringwrap[data-w="1"] #timerDisplay{color:#E11D48;animation:tickPulse .5s ease-in-out infinite alternate}
+@keyframes tickPulse{to{transform:scale(1.12)}}
+#timerStatusText{margin-top:3px;font-size:9px;font-weight:800;letter-spacing:.14em;color:var(--ac)}
+.cue{width:100%;margin-top:12px;display:flex;gap:10px;padding:12px;border-radius:20px;background:linear-gradient(135deg,rgba(255,255,255,.95),rgba(255,255,255,.6));border:1px solid rgba(255,255,255,1)}
+.cue i{flex:none;width:26px;height:26px;border-radius:9px;background:linear-gradient(135deg,var(--ac),var(--ac2));display:grid;place-items:center;color:#fff}
+.cue i svg{width:14px;height:14px}
+#formCueText{margin:0;font-size:12.5px;font-weight:600;line-height:1.5;color:#4A3050}
+.next{width:100%;margin-top:10px;display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12px}
+.next span:first-child{font-size:10px;font-weight:800;letter-spacing:.12em;color:var(--mute);text-transform:uppercase}
+#upNextText{font-weight:700;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:76%;transition:color .3s,transform .3s}
+#upNextText.flash{color:var(--ac);animation:upNextFlash 1.4s ease-out 1}
+@keyframes upNextFlash{0%,100%{transform:scale(1)}20%{transform:scale(1.08)}}
+.dock{position:fixed;z-index:30;left:12px;right:12px;bottom:calc(var(--sb) + 10px);max-width:496px;margin:0 auto;padding:10px;border-radius:34px;display:flex;gap:10px;align-items:center;background:rgba(255,255,255,.78);backdrop-filter:blur(24px) saturate(1.6);-webkit-backdrop-filter:blur(24px) saturate(1.6);border:1px solid rgba(255,255,255,.95);box-shadow:0 20px 40px -14px rgba(150,30,100,.5)}
+.dk{width:60px;height:58px;border-radius:24px;background:#fff;color:var(--ac);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:9.5px;font-weight:800;box-shadow:0 4px 10px -6px rgba(0,0,0,.3);transition:transform .15s,color .5s}
+.dk svg{width:20px;height:20px}
+.go{flex:1;height:58px;border-radius:24px;color:#fff;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;gap:9px;background:linear-gradient(135deg,var(--ac2),var(--ac));box-shadow:0 12px 22px -8px var(--ac);transition:transform .15s,background .5s}
+.go svg{width:22px;height:22px}
+.modal{position:fixed;inset:0;z-index:50;background:rgba(42,19,48,.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:flex-end;justify-content:center;animation:fade .25s}
+@keyframes fade{from{opacity:0}}
+.sheet{width:100%;max-width:520px;max-height:88dvh;background:#FFF9FC;border-radius:32px 32px 0 0;display:flex;flex-direction:column;overflow:hidden;animation:up .4s cubic-bezier(.2,1,.3,1);padding-bottom:var(--sb)}
+@keyframes up{from{transform:translateY(60%)}}
+.sheet.c{border-radius:32px;margin:16px;width:auto;max-width:420px;align-self:center;padding:26px 22px;text-align:center;position:relative;overflow:hidden}
+.grab{width:38px;height:5px;border-radius:9px;background:#E9C9DB;margin:9px auto 0}
+.sh{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;gap:10px}
+.sh h3{margin:0;font-size:17px;font-weight:800}.sh p{margin:2px 0 0;font-size:11.5px;color:var(--mute);font-weight:600}
+.x{width:32px;height:32px;border-radius:50%;background:#fff;color:var(--mute);font-weight:800;flex:none}
+#timelineList{padding:4px 12px 10px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:7px;-webkit-overflow-scrolling:touch}
+.ti{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:18px;background:#fff;border:1.5px solid transparent;transition:transform .15s}
+.ti:active{transform:scale(.98)}.ti.rest{background:#F0FBF6}.ti.cur{border-color:var(--ac2);background:#FFF0F7;box-shadow:0 8px 18px -10px #EC4899}
+.tn{flex:none;width:27px;height:27px;border-radius:50%;display:grid;place-items:center;background:#FDE3EF;color:#BE185D;font-size:11px;font-weight:800}
+.ti.cur .tn{background:#EC4899;color:#fff}.tn.dn{background:#10B981;color:#fff}
+.tt{flex:1;min-width:0}.tt b{display:block;font-size:12.5px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tt small{font-size:10.5px;font-weight:600;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.tg{flex:none;text-align:right;font-size:10px;font-weight:800;color:#9CA3AF}.tg em{display:block;font-style:normal;padding:2px 8px;border-radius:99px;background:#FDE3EF;color:#BE185D;margin-bottom:2px}
+.sf{display:flex;justify-content:space-between;padding:12px 16px;border-top:1px solid #F7DCEA;background:rgba(255,255,255,.7)}
+.btn{padding:12px 18px;border-radius:16px;font-size:12.5px;font-weight:800;background:#FFE4EE;color:#E11D48}
+.btn.p{background:linear-gradient(135deg,#F472B6,#EC4899);color:#fff;box-shadow:0 10px 18px -8px #EC4899}
+.big{width:100%;margin-top:6px;padding:15px}
+.badge-i{width:68px;height:68px;margin:0 auto 12px;border-radius:24px;background:linear-gradient(135deg,#FB7185,#EC4899,#D946EF);display:grid;place-items:center;color:#fff;box-shadow:0 14px 26px -10px #EC4899;font-size:32px}
+.sheet.c h3{margin:0;font-size:23px;font-weight:800}.sheet.c p{font-size:13px;line-height:1.55;color:#6B5070;margin:8px 0 0;font-weight:600}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0}.stats div{padding:12px 4px;border-radius:18px;background:#fff;font-size:15px;font-weight:800;color:#EC4899}.stats small{display:block;font-size:10px;color:var(--mute);margin-top:2px;font-weight:700}
+ol{list-style:none;padding:0;margin:8px 0 14px;display:flex;flex-direction:column;gap:8px;text-align:left}ol li{display:flex;gap:10px;padding:11px;border-radius:16px;background:#fff;font-size:12.5px;font-weight:600;line-height:1.45;align-items:flex-start}ol li s{flex:none;text-decoration:none;width:22px;height:22px;border-radius:50%;background:#EC4899;color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center}
+.conf{position:absolute;top:-12px;width:8px;height:12px;border-radius:2px;animation:fall 2.8s linear forwards}
+@keyframes fall{to{transform:translateY(560px) rotate(720deg);opacity:.6}}
+.mixer{position:fixed;z-index:45;top:calc(var(--st) + 58px);right:14px;width:min(310px,calc(100vw - 28px));background:rgba(255,250,253,.96);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border:1px solid #fff;border-radius:24px;padding:14px;box-shadow:0 22px 44px -16px rgba(120,25,85,.45);animation:pop .25s cubic-bezier(.2,1.3,.4,1)}
+.mx-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.mx-hd>div{display:flex;flex-direction:column;min-width:0}.mx-hd b{font-size:13px;font-weight:800}.mx-hd small{font-size:10.5px;font-weight:700;color:var(--mute)}
+.mx-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 10px;border-radius:16px;background:#fff;margin-bottom:7px;border:1px solid #FCE4F0}.mx-row:last-child{margin-bottom:0}
+.mx-lbl{display:flex;flex-direction:column;min-width:0}.mx-lbl span{font-size:12px;font-weight:800}.mx-lbl small{font-size:10px;font-weight:600;color:var(--mute)}
+.mx-ctrl{display:flex;align-items:center;gap:6px}
+.vol-pill{padding:4px 8px;border-radius:99px;font-size:10px;font-weight:800;background:#FDE7F2;color:#BE185D}
+.sw{width:42px;height:24px;border-radius:99px;background:#E5D0DC;position:relative;transition:background .25s;flex:none}
+.sw::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2);transition:transform .25s}
+.sw.on{background:linear-gradient(135deg,#F472B6,#EC4899)}.sw.on::after{transform:translateX(18px)}
+.wk-strip{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin:12px 0}
+.wk-d{padding:8px 2px;border-radius:14px;background:#fff;border:1.5px solid #F7DCEA;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;font-weight:800;color:var(--mute);transition:all .2s}
+.wk-d i{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:10px;background:transparent;border:1.5px dashed #F3C6DC;color:transparent}
+.wk-d.sel{border-color:#EC4899;background:#FFF0F7;color:#BE185D;box-shadow:0 6px 14px -8px #EC4899}
+.wk-d.done{background:#ECFDF5;border-color:#A7F3D0;color:#047857}.wk-d.done i{background:#10B981;color:#fff;border-style:solid;border-color:#10B981}
+.wk-d.sel.done{border-color:#EC4899;box-shadow:0 6px 14px -8px #EC4899}
+.time-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;border-radius:18px;background:#fff;border:1px solid #F7DCEA;margin-bottom:12px}
+.time-row label{font-size:12px;font-weight:800;color:var(--ink);text-align:left}.time-row small{display:block;font-size:10.5px;font-weight:600;color:var(--mute)}
+.time-in{font:800 14px 'Plus Jakarta Sans',sans-serif;color:#EC4899;background:#FFF0F7;border:1.5px solid #FBCFE8;border-radius:12px;padding:7px 10px;outline:none}
+.wk-log{max-height:150px;overflow-y:auto;display:flex;flex-direction:column;gap:5px;margin:10px 0;text-align:left}
+.wk-li{display:flex;justify-content:space-between;align-items:center;padding:8px 11px;border-radius:13px;background:#fff;font-size:11.5px;font-weight:700}
+.wk-li span{color:#047857;font-weight:800}.wk-li small{color:var(--mute);font-weight:600}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important}}
+
+@property --ac{syntax:'<color>';inherits:true;initial-value:#EC4899}
+@property --ac2{syntax:'<color>';inherits:true;initial-value:#F472B6}
+@property --tint{syntax:'<color>';inherits:true;initial-value:#FFD9EA}
+html,body{position:fixed;inset:0;width:100%;height:100%;overflow:hidden;overscroll-behavior:none}
+body{transition:--ac .7s ease,--ac2 .7s ease,--tint .7s ease}
+body::before{content:'';position:fixed;top:0;left:0;right:0;height:var(--st);background:linear-gradient(#2A1330,#3B1D45);z-index:60;pointer-events:none}
+.app{position:absolute;inset:0;margin:0 auto;height:100%;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.app::-webkit-scrollbar{display:none}
+.blob{filter:none;background:radial-gradient(closest-side,var(--tint),transparent);transition:none;will-change:transform}
+.b1{animation:drift 14s ease-in-out infinite}.b2{animation:drift 18s ease-in-out infinite reverse}
+@keyframes drift{50%{transform:translate3d(26px,32px,0) scale(1.1)}}
+.card{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(255,255,255,.9)}
+#timerRing{transition:stroke-dashoffset 1s linear}
+.ib,.dk,.go,.ti{transition:transform .35s cubic-bezier(.3,1.5,.5,1)}
+.ib:active,.dk:active,.go:active{transform:scale(.92);transition-duration:.08s}
+.sheet{animation:up .5s cubic-bezier(.32,.72,0,1)}
+.modal.closing{animation:fadeout .23s forwards}
+.modal.closing .sheet{animation:down .23s cubic-bezier(.4,0,1,1) forwards}
+@keyframes fadeout{to{opacity:0}}@keyframes down{to{transform:translateY(40%)}}
+#formCueText .cs{display:block;position:relative;padding-left:13px}
+#formCueText .cs+.cs{margin-top:4px}
+#formCueText .cs::before{content:'';position:absolute;left:0;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--ac)}
+.time-in,select.time-in{font-size:16px}
+@media(max-height:700px){.stage svg{height:24dvh}h2{font-size:19px}.ringwrap{width:100px;height:100px}}
+.foot{text-align:center;font-size:11px;font-weight:700;color:var(--mute);opacity:.8;padding:2px 0 4px;letter-spacing:.02em}
+.app{padding-bottom:calc(var(--sb) + 104px);gap:8px}
+.card{flex:1 1 0;min-height:0}
+.stage{flex:1 1 0;min-height:84px;max-height:300px}
+.stage svg{height:100%!important;min-height:0}
+.cue,.next,.badges,h2,#setVariationLabel,.ringwrap{flex:none}
+.foot{flex:none}
+body::before{display:none}
+.rate{display:flex;align-items:center;justify-content:center;gap:6px;margin:10px 0 2px;font-size:12px;font-weight:700;color:var(--mute)}
+.rate button{border:0;background:none;font-size:26px;line-height:1;color:#F9C6DC;padding:2px;transition:transform .25s cubic-bezier(.3,1.5,.5,1),color .2s}.rate button.on{color:#EC4899}.rate button:active{transform:scale(.85)}
+#leadIn{position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle,rgba(255,228,240,.96),rgba(255,214,232,.9));opacity:0;pointer-events:none;transition:opacity .3s}
+#leadIn.on{opacity:1}#leadIn b{font-size:110px;line-height:1;color:var(--ac);animation:lead 1s ease-out infinite}#leadIn span{font-weight:800;color:var(--ink);letter-spacing:.04em}
+@keyframes lead{0%{transform:scale(.6);opacity:0}30%{transform:scale(1.08);opacity:1}100%{transform:scale(1);opacity:.9}}
+.toast{position:fixed;left:50%;bottom:calc(var(--sb) + 112px);transform:translateX(-50%);background:#2A1330;color:#fff;padding:10px 16px;border-radius:14px;font-size:13px;font-weight:700;z-index:80;animation:up .4s cubic-bezier(.32,.72,0,1);display:flex;align-items:center;gap:10px;white-space:nowrap}
+.toast button{background:var(--ac);color:#fff;padding:5px 11px;border-radius:9px;font-size:12px;font-weight:800;flex:none}
+</style>
+</head>
+<body data-t="warmup">
+<div class="blob b1"></div><div class="blob b2"></div>
+<div id="appRoot" class="app paused">
+ <header>
+  <div class="brand">
+   <div class="logo"><svg width="26" height="26" viewBox="0 0 32 32" fill="none"><path d="M11 12V9c0-3.4 10-3.4 10 0v3" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><circle cx="16" cy="19.5" r="8.5" fill="#fff"/><circle cx="13" cy="16.5" r="2.2" fill="#F9A8D4"/></svg></div>
+   <div>
+    <h1>Kettlebell<b>Pink</b></h1>
+    <div class="sub"><span id="wakeBadge"><i></i><span id="wakeText">Awake Ready</span></span><span><strong id="elapsedClock">00:00</strong> / 32:00</span></div>
+   </div>
+  </div>
+  <div class="tools">
+   <button id="soundToggleBtn" class="ib" onclick="toggleAudioMixer()" aria-label="Audio mixer">
+    <svg id="soundOnIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>
+    <svg id="soundOffIcon" class="hidden" viewBox="0 0 24 24" fill="none" stroke="#B9A3BD" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M23 9l-6 6M17 9l6 6"/></svg>
+   </button>
+   <button id="weekBtn" class="ib wk" onclick="openCheckInModal(true)" aria-label="Weekly progress"><span id="weekDayTag">Wed</span><b id="weekCountBadge">0/7</b></button>
+   <button id="installBtn" class="ib" onclick="handleInstallClick()" aria-label="Add to Home Screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"/></svg></button>
+   <button class="ib plan" onclick="openModal('timelineModal')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></svg>Plan</button>
+  </div>
+ </header>
+
+ <div id="audioMixerPopover" class="mixer hidden">
+  <div class="mx-hd"><div><b>Studio Audio Mixer</b><small id="voiceStatusTag">Female Coach Ready</small></div><button class="x" onclick="toggleAudioMixer()" aria-label="Close audio mixer">✕</button></div>
+  <div class="mx-row">
+   <div class="mx-lbl"><span>Voice Coach</span><small>Instructions, cues &amp; 10s countdown</small></div>
+   <div class="mx-ctrl"><button id="swVoice" class="sw on" onclick="toggleAudioChannel('voice')" aria-label="Toggle Voice Coach"></button></div>
+  </div>
+  <div class="mx-row">
+   <div class="mx-lbl"><span>Chill Vibe Music</span><small>Slow ambient groove (auto-ducks)</small></div>
+   <div class="mx-ctrl">
+    <button id="musicVolBtn" class="vol-pill" onclick="cycleMusicLevel()">Low</button>
+    <button id="swMusic" class="sw on" onclick="toggleAudioChannel('music')" aria-label="Toggle Chill Vibe Music"></button>
+   </div>
+  </div>
+  <div class="mx-row">
+   <div class="mx-lbl"><span>Countdown &amp; Chimes</span><small>Interval bells &amp; switch tones</small></div>
+   <div class="mx-ctrl"><button id="swChimes" class="sw on" onclick="toggleAudioChannel('chimes')" aria-label="Toggle Countdown and Chimes"></button></div>
+  </div>
+ </div>
+
+ <div class="track"><div id="overallProgressBar" style="width:0%"></div></div>
+ <div id="journey" class="journey"></div>
+ <div class="meta"><span id="phaseBadge">Phase 1 • Dynamic Warm-Up</span><span id="stepCounter">Step 1 of 65</span></div>
+
+ <main class="card">
+  <div class="badges">
+   <div id="bellBadge" data-k="bw"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="rgba(255,255,255,.28)"/><path d="M12 13v-2c0-3 8-3 8 0v2" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="19" r="6" fill="#fff"/></svg><span id="bellBadgeText">BODYWEIGHT</span></div>
+   <div class="rep"><span id="repBadgeText">40 SEC FLOW</span></div>
+  </div>
+  <h2 id="exerciseTitle" aria-live="polite">Kang Squats</h2>
+  <p id="setVariationLabel"></p>
+
+  <div class="stage">
+   <svg id="svgStage" viewBox="0 0 240 220" preserveAspectRatio="xMidYMax meet" aria-label="Instructor demonstration">
+    <defs>
+     <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF4F9"/><stop offset="1" stop-color="#FFD3E6"/></linearGradient>
+     <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F8B8D4"/><stop offset="1" stop-color="#F08DB8"/></linearGradient>
+     <linearGradient id="bellG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF8FC4"/><stop offset=".55" stop-color="#F43F8E"/><stop offset="1" stop-color="#C0236E"/></linearGradient>
+    </defs>
+    <rect x="-300" width="840" height="220" fill="url(#wall)"/>
+    <circle cx="190" cy="52" r="46" fill="#fff" opacity=".45"/><circle cx="190" cy="52" r="28" fill="#fff" opacity=".5"/>
+    <rect x="16" y="14" width="208" height="166" rx="16" fill="#fff" opacity=".32" stroke="#fff" stroke-opacity=".9"/>
+    <path d="M40 14h28L28 180H16V40a26 26 0 0 1 24-26z" fill="#fff" opacity=".28"/><path d="M92 14h14L66 180H52z" fill="#fff" opacity=".2"/>
+    <rect x="-300" y="190" width="840" height="40" fill="url(#floor)"/><rect x="-300" y="190" width="840" height="2" fill="#fff" opacity=".7"/>
+    <g id="fig"></g>
+   </svg>
+   <div id="tempoPill"><i class="tdot"></i><span id="tempoText">Smooth Flow</span></div>
+  </div>
+
+  <div id="ringWrap" class="ringwrap">
+   <div id="pulseAura"></div>
+   <svg viewBox="0 0 100 100"><defs><linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--ac2)"/><stop offset="1" style="stop-color:var(--ac)"/></linearGradient></defs>
+    <circle cx="50" cy="50" r="42" stroke="#F8E3EE" stroke-width="8" fill="none"/>
+    <circle id="timerRing" cx="50" cy="50" r="42" stroke="url(#ringGrad)" stroke-width="8" stroke-linecap="round" fill="none" stroke-dasharray="263.89" stroke-dashoffset="0"/></svg>
+   <div class="tc"><span id="timerDisplay" aria-hidden="true">0:40</span><span id="timerStatusText" aria-live="polite">READY</span></div>
+  </div>
+
+  <div class="cue"><i><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></i><p id="formCueText"></p></div>
+  <div class="next"><span>Up Next</span><span id="upNextText"></span></div>
+ </main>
+ <footer class="foot">Prepared by Yusrie</footer>
+</div>
+
+<nav class="dock">
+ <button class="dk" onclick="prevStep()" aria-label="Previous"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2.5v14H6zM20 5v14L9.5 12z"/></svg>Prev</button>
+ <button id="playPauseBtn" class="go" onclick="togglePlay()">
+  <svg id="playIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15a1 1 0 0 0 1.5.9l12-7.5a1 1 0 0 0 0-1.8l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>
+  <svg id="pauseIcon" class="hidden" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4.5" height="16" rx="1.5"/><rect x="13.5" y="4" width="4.5" height="16" rx="1.5"/></svg>
+  <span id="playPauseLabel">Start Workout</span>
+ </button>
+ <button id="nextBtn" class="dk" onclick="nextStep(true)" aria-label="Done or next"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 5h-2.5v14H18zM4 5v14l10.5-7z"/></svg><span id="nextBtnLabel">Done</span></button>
+</nav>
+
+<div id="timelineModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="timelineModalTitle" onclick="if(event.target===this)closeModal('timelineModal')">
+ <div class="sheet"><div class="grab"></div>
+  <div class="sh"><div><h3 id="timelineModalTitle">32:00 Workout Blueprint</h3><p>Tap any interval to jump to it</p></div><button class="x" onclick="closeModal('timelineModal')">✕</button></div>
+  <div id="timelineList"></div>
+  <div class="sf"><button class="btn" onclick="resetWorkout()">Reset Session</button><button class="btn p" onclick="closeModal('timelineModal')">Back to Timer</button></div>
+ </div>
+</div>
+
+<div id="installModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="installModalTitle" onclick="if(event.target===this)closeModal('installModal')">
+ <div class="sheet"><div class="grab"></div>
+  <div class="sh"><div><h3 id="installModalTitle">Install on iPhone</h3><p>Full-screen, like a native app</p></div><button class="x" onclick="closeModal('installModal')">✕</button></div>
+  <div style="padding:0 16px 16px"><ol>
+   <li><s>1</s><span>Open this page in <b>Safari</b>.</span></li>
+   <li><s>2</s><span>Tap the <b>Share</b> icon in Safari’s toolbar.</span></li>
+   <li><s>3</s><span>Choose <b>Add to Home Screen</b>, then <b>Add</b>. Your pink kettlebell icon lands on your Home Screen.</span></li></ol>
+   <button class="btn p big" onclick="closeModal('installModal')">Got It</button></div>
+ </div>
+</div>
+
+<div id="completeModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="completeTitle" style="align-items:center">
+ <div class="sheet c" id="confBox">
+  <div class="badge-i" id="completeIcon">✨</div>
+  <h3 id="completeTitle">Workout Complete!</h3>
+  <p id="completeSubtitle">You finished the full <b>32:00 Pink Kettlebell Session</b>: warm-up, all 3 strength rounds and the spinal decompression. Beautiful work.</p>
+  <div class="stats" id="completeStats"><div>32:00<small>Total Time</small></div><div>3 Rounds<small>9 Moves</small></div><div>6 &amp; 8 kg<small>Pink Bells</small></div></div>
+  <div class="wk-strip" id="completeWeekStrip"></div>
+  <div id="sundaySummaryArea" class="hidden">
+   <div class="wk-log" id="sundayLogList"></div>
+   <div style="display:flex;gap:8px;margin-top:8px">
+    <button class="btn" style="flex:1" onclick="resetCurrentWeek()">Start Fresh Week</button>
+    <button class="btn p" style="flex:1" onclick="shareWeeklySummary()">Copy / Share Wrap-Up</button>
+   </div>
+  </div>
+  <button class="btn p big" onclick="resetWorkout();closeModal('completeModal')">Finish &amp; Reset Timer</button>
+ </div>
+</div>
+
+<div id="checkInModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="checkInModalTitle" style="align-items:center" onclick="if(event.target===this)closeModal('checkInModal')">
+ <div class="sheet c">
+  <div class="badge-i">🩷</div>
+  <h3 id="checkInModalTitle">Session Check-In</h3>
+  <p>Select your workout day &amp; time to log this week’s progress. Tap any completed day pill to edit.</p>
+  <div class="wk-strip" id="checkInWeekStrip"></div>
+  <div class="time-row">
+   <div><label for="sessionTimeInput">Session Time</label><small id="checkInWeekLabel">This Week’s Progress</small></div>
+   <input id="sessionTimeInput" class="time-in" type="time" />
+  </div>
+  <div style="display:flex;gap:8px">
+   <button class="btn" style="flex:1" onclick="closeModal('checkInModal')">Browse First</button>
+   <button class="btn p" style="flex:1.4" onclick="confirmCheckInAndStart()">Confirm &amp; Ready</button>
+  </div>
+ </div>
+</div>
+  <script>
+    // =========================================================================
+    // 0. PUBLIC PWA MANIFEST (BLOB/DATA URL + PNG CANVAS ICONS) & SERVICE WORKER
+    // =========================================================================
+    let deferredInstallPrompt = null;
+
+    (function initPublicPWA() {
+      const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FDF2F8"/><stop offset="100%" stop-color="#FCE7F3"/></linearGradient><linearGradient id="kb" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#F43F5E"/><stop offset="100%" stop-color="#EC4899"/></linearGradient></defs><rect width="180" height="180" rx="40" fill="url(#bg)"/><path d="M64 66 V50 C64 34 116 34 116 50 V66" fill="none" stroke="#BE185D" stroke-width="12" stroke-linecap="round"/><circle cx="90" cy="106" r="44" fill="url(#kb)"/><circle cx="76" cy="90" r="10" fill="#FFFFFF" opacity="0.28"/><text x="90" y="113" font-family="system-ui,sans-serif" font-weight="800" font-size="22" fill="#FFFFFF" text-anchor="middle">30m</text></svg>`;
+      const svgDataUrl = 'data:image/svg+xml,' + encodeURIComponent(iconSvg);
+
+      function renderPngIcon(size) {
+        try {
+          const c = document.createElement('canvas');
+          c.width = size;
+          c.height = size;
+          const ctx = c.getContext('2d');
+          if (!ctx) return null;
+          const s = size / 180;
+          ctx.scale(s, s);
+
+          // Rounded background
+          const bgGrad = ctx.createLinearGradient(0, 0, 180, 180);
+          bgGrad.addColorStop(0, '#FDF2F8');
+          bgGrad.addColorStop(1, '#FCE7F3');
+          ctx.fillStyle = bgGrad;
+          ctx.beginPath();
+          if (ctx.roundRect) {
+            ctx.roundRect(0, 0, 180, 180, 40);
+          } else {
+            ctx.rect(0, 0, 180, 180);
+          }
+          ctx.fill();
+
+          // Handle
+          ctx.strokeStyle = '#BE185D';
+          ctx.lineWidth = 12;
+          ctx.lineCap = 'round';
+          ctx.beginPath();
+          ctx.moveTo(64, 66);
+          ctx.lineTo(64, 50);
+          ctx.bezierCurveTo(64, 34, 116, 34, 116, 50);
+          ctx.lineTo(116, 66);
+          ctx.stroke();
+
+          // Kettlebell body
+          const kbGrad = ctx.createLinearGradient(46, 62, 134, 150);
+          kbGrad.addColorStop(0, '#F43F5E');
+          kbGrad.addColorStop(1, '#EC4899');
+          ctx.fillStyle = kbGrad;
+          ctx.beginPath();
+          ctx.arc(90, 106, 44, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Specular highlight
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.28)';
+          ctx.beginPath();
+          ctx.arc(76, 90, 10, 0, Math.PI * 2);
+          ctx.fill();
+
+          // 30m label
+          ctx.fillStyle = '#FFFFFF';
+          ctx.font = '800 22px system-ui, -apple-system, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'alphabetic';
+          ctx.fillText('30m', 90, 113);
+
+          return c.toDataURL('image/png');
+        } catch (e) {
+          return null;
+        }
+      }
+
+      const png192 = renderPngIcon(192);
+      const _ai = document.getElementById('appleTouchIcon'), _p180 = renderPngIcon(180);
+
+      const png512 = renderPngIcon(512);
+      const icons = [
+        { src: svgDataUrl, sizes: '192x192', type: 'image/svg+xml', purpose: 'any maskable' },
+        { src: svgDataUrl, sizes: '512x512', type: 'image/svg+xml', purpose: 'any maskable' }
+      ];
+      if (png192) icons.unshift({ src: png192, sizes: '192x192', type: 'image/png', purpose: 'any maskable' });
+      if (png512) icons.unshift({ src: png512, sizes: '512x512', type: 'image/png', purpose: 'any maskable' });
+
+      const startUrl = (window.location.protocol === 'http:' || window.location.protocol === 'https:')
+        ? window.location.href.split('#')[0]
+        : '.';
+
+      const manifestObj = {
+        name: 'KettlebellPink',
+        short_name: 'KettlebellPink',
+        description: '32:00 Full-Body Pink Kettlebell Workout & Guided Timer',
+        start_url: startUrl,
+        display: 'standalone',
+        orientation: 'portrait',
+        background_color: '#FFE9F3',
+        theme_color: '#FFE4F0',
+        icons: icons
+      };
+
+      const manifestLink = document.getElementById('pwaManifest');
+      if (manifestLink) {
+        try {
+          if (typeof Blob !== 'undefined' && URL && URL.createObjectURL) {
+            const manifestBlob = new Blob([JSON.stringify(manifestObj)], { type: 'application/manifest+json' });
+            manifestLink.href = URL.createObjectURL(manifestBlob);
+          } else {
+            manifestLink.href = 'data:application/manifest+json,' + encodeURIComponent(JSON.stringify(manifestObj));
+          }
+        } catch (e) {
+          manifestLink.href = 'data:application/manifest+json,' + encodeURIComponent(JSON.stringify(manifestObj));
+        }
+      }
+
+      // Listen for Android/Desktop Chrome beforeinstallprompt
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredInstallPrompt = e;
+      });
+
+      window.addEventListener('appinstalled', () => {
+        deferredInstallPrompt = null;
+        const btn = document.getElementById('installBtn');
+        if (btn) btn.classList.add('hidden');
+      });
+
+      // Register the Service Worker when on a secure HTTP/HTTPS origin
+      const isHttpOrigin = window.location.protocol === 'https:' ||
+        (window.location.protocol === 'http:' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'));
+
+      if ('serviceWorker' in navigator && isHttpOrigin) {
+        try {
+          navigator.serviceWorker.register('sw.js').catch(() => {});
+          // Let the user know when a new version is ready instead of silently
+          // running stale code until they happen to fully close and reopen the app.
+          let _swRefreshing = false;
+          navigator.serviceWorker.addEventListener('controllerchange', () => {
+            if (_swRefreshing) return;
+            _swRefreshing = true;
+            const show = () => {
+              const e = document.createElement('div');
+              e.className = 'toast';
+              e.innerHTML = '<span>App updated</span>';
+              const btn = document.createElement('button');
+              btn.textContent = 'Refresh';
+              btn.onclick = () => location.reload();
+              e.appendChild(btn);
+              document.body.appendChild(e);
+            };
+            if (document.readyState === 'loading') window.addEventListener('DOMContentLoaded', show);
+            else show();
+          });
+        } catch (e) {
+          // Graceful fallback in sandboxed frames or restricted origins
+        }
+      }
+    })();
+
+    function handleInstallClick() {
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        deferredInstallPrompt.userChoice.then(() => {
+          deferredInstallPrompt = null;
+        }).catch(() => {
+          openModal('installModal');
+        });
+      } else {
+        openModal('installModal');
+      }
+    }
+
+    // =========================================================================
+    // 1. COMPLETE 32:00 WORKOUT TIMELINE DATA (Warm-Up, 3 Rounds, Cool-Down)
+    // =========================================================================
+    const BASE_CIRCUIT = [
+      {
+        id: 'goblet_squat',
+        num: 1,
+        circuit: 'Circuit 1 • Lower Body',
+        title: '1. Goblet Squat',
+        bell: '8 KG PINK BELL',
+        bellType: '8kg',
+        reps: '12–14 REPS',
+        tempo: '3s Down • 1s Pause',
+        anim: 'goblet_squat',
+        sets: {
+          1: { label: 'Set 1 of 3 • Two-Hand Horn Grip', cue: 'Hold the 8 kg pink bell tight at your chest with elbows tucked inside knees. Lower for 3 seconds, pause 1 second at the bottom, and drive up through midfoot.' },
+          2: { label: 'Set 2 of 3 • Two-Hand Horn Grip', cue: 'Keep chest proud and ribs stacked over pelvis. Controlled 3-second descent, 1-second bottom pause, strong drive up.' },
+          3: { label: 'Set 3 of 3 • Optional 1.5 Pulse', cue: 'Same 12–14 reps with 8 kg—add a controlled half-way pulse at the bottom of each squat for extra glute and quad burn.' }
+        }
+      },
+      {
+        id: 'staggered_deadlift',
+        num: 2,
+        circuit: 'Circuit 1 • Lower Body',
+        title: '2. Staggered Deadlift',
+        bell: '8 KG PINK BELL',
+        bellType: '8kg',
+        reps: '10–12 REPS',
+        tempo: '3s Controlled Hinge',
+        anim: 'staggered_deadlift',
+        sets: {
+          1: { label: 'Set 1 of 3 • Right Leg Lead', cue: 'Plant right foot forward (80% load) and pop left toe behind for balance (20% load). Hold 8 kg in left hand, hinge 3s down, snap hips tall.' },
+          2: { label: 'Set 2 of 3 • Left Leg Lead', cue: 'Plant left foot forward (80% load) and pop right toe behind for balance. Hold 8 kg in right hand, keep bell tight to shin, drive hips forward.' },
+          3: { label: 'Set 3 of 3 • Bilateral Deadlift + Clean', cue: '12 reps with feet parallel! Hinge down with 8 kg for 3 seconds, then snap hips forward to clean the pink bell smoothly to chest height.' }
+        }
+      },
+      {
+        id: 'bulgarian_lunge',
+        num: 3,
+        circuit: 'Circuit 1 • Lower Body',
+        title: '3. Bulgarian Split Lunge',
+        bell: '8 KG PINK BELL',
+        bellType: '8kg',
+        reps: '8–10 REPS',
+        tempo: '3s Slow Lower',
+        anim: 'bulgarian_lunge',
+        sets: {
+          1: { label: 'Set 1 of 3 • Right Leg Forward', cue: 'Place left laces on bench/couch, right foot forward. Hold 8 kg at side or chest, drop back knee straight down for 3 seconds, push through front heel.' },
+          2: { label: 'Set 2 of 3 • Left Leg Forward', cue: 'Place right laces on bench/couch, left foot forward. Hinge slightly forward to bias glutes or stay upright for quads. 3-second lower.' },
+          3: { label: 'Set 3 of 3 • Alternating Step-Back Lunge', cue: '14 total reps (7/leg) on the mat with 8 kg. Step back into a lunge and pass the pink bell side-to-side around the front leg at the top.' }
+        }
+      },
+      {
+        id: 'three_point_row',
+        num: 4,
+        circuit: 'Circuit 2 • Upper Body',
+        title: '4. 3-Point Single-Arm Row',
+        bell: '8 KG PINK BELL',
+        bellType: '8kg',
+        reps: '10–12 REPS',
+        tempo: '1s Squeeze • 3s Lower',
+        anim: 'three_point_row',
+        sets: {
+          1: { label: 'Set 1 of 3 • Right Arm Row', cue: 'Brace left hand on bench/couch with flat back parallel to floor. Pull 8 kg elbow toward your right hip pocket, squeeze 1s, lower for 3s.' },
+          2: { label: 'Set 2 of 3 • Left Arm Row', cue: 'Brace right hand on bench/couch with core tight. Row 8 kg toward left hip pocket without rotating shoulders; controlled 3-second lower.' },
+          3: { label: 'Set 3 of 3 • Alternating Bent-Over Row', cue: '14 total reps (7/arm) from a freestanding hinged stance on the floor (no bench). Alternate rowing the 8 kg bell smoothly.' }
+        }
+      },
+      {
+        id: 'shoulder_press',
+        num: 5,
+        circuit: 'Circuit 2 • Upper Body',
+        title: '5. Kettlebell Shoulder Press',
+        bell: '6 KG PINK BELL',
+        bellType: '6kg',
+        reps: '8–10 REPS',
+        tempo: 'Strict Press • 3s Lower',
+        anim: 'shoulder_press',
+        sets: {
+          1: { label: 'Set 1 of 3 • Right Arm Single Press (6 kg)', cue: 'Rack the 6 kg pink bell at your right shoulder, stack ribs tightly over hips (no lower-back arch), press straight overhead, lower for 3s.' },
+          2: { label: 'Set 2 of 3 • Left Arm Single Press (6 kg)', cue: 'Rack the 6 kg pink bell at your left shoulder, brace glutes and abs, press bicep by ear overhead, and control the 3-second descent.' },
+          3: { label: 'Set 3 of 3 • Two-Hand Horn Press (8 kg)', cue: 'Switch to 8 kg! Hold by the horns at chest height and press straight overhead for 12 crisp reps with ribs locked down.' }
+        }
+      },
+      {
+        id: 'hollow_chest_press',
+        num: 6,
+        circuit: 'Circuit 2 • Upper Body',
+        title: '6. Hollow Rock Chest Press',
+        bell: '8 KG PINK BELL',
+        bellType: '8kg',
+        reps: '10–12 REPS',
+        tempo: 'Hollow Hold • 3s Lower',
+        anim: 'hollow_chest_press',
+        sets: {
+          1: { label: 'Set 1 of 3 • Hollow Body Horn Press', cue: 'Lie on mat holding 8 kg by the horns. Float shoulder blades and extend legs into a hollow hold (or bend knees), press up, lower 3s until elbows tap.' },
+          2: { label: 'Set 2 of 3 • Hollow Body Horn Press', cue: 'Keep lower back glued to the mat! Press 8 kg straight over chest and lower with control for 3 seconds.' },
+          3: { label: 'Set 3 of 3 • Horn Press or Single-Arm Floor Press', cue: '10–12 hollow horn presses with 8 kg—or perform 8 single-arm floor presses per side for extra chest and core focus.' }
+        }
+      },
+      {
+        id: 'kb_swing',
+        num: 7,
+        circuit: 'Circuit 3 • Total Body & Core',
+        title: '7. Kettlebell Swing',
+        bell: '8 KG PINK BELL',
+        bellType: '8kg',
+        reps: '20 REPS',
+        tempo: 'Explosive Hip Snap',
+        anim: 'kb_swing',
+        sets: {
+          1: { label: 'Set 1 of 3 • Two-Hand Power Swing', cue: 'Engage lats ("break the pink bell handle"), hike deep between upper thighs, and snap hips forcefully to float the 8 kg bell to chest height.' },
+          2: { label: 'Set 2 of 3 • Two-Hand Power Swing', cue: 'Keep the 8 kg bell snappy and crisp! Stand tall in a vertical plank at the top without leaning back.' },
+          3: { label: 'Set 3 of 3 • Final 20 Explosive Swings', cue: 'Drive through heels and squeeze glutes hard at the top of every rep—let hip power float the weight.' }
+        }
+      },
+      {
+        id: 'lateral_lunge_press',
+        num: 8,
+        circuit: 'Circuit 3 • Total Body & Core',
+        title: '8. Lateral Lunge, Clean & Press',
+        bell: '6 KG PINK BELL',
+        bellType: '6kg',
+        reps: '8 REPS',
+        tempo: 'Lunge → Rack Clean → Press',
+        anim: 'lateral_lunge_press',
+        sets: {
+          1: { label: 'Set 1 of 3 • Step Right (6 kg)', cue: 'With 6 kg bell, step wide to the right sitting hips back into the bent right knee, push off to clean bell to rack, and press overhead.' },
+          2: { label: 'Set 2 of 3 • Step Left (6 kg)', cue: 'With 6 kg bell, step wide to the left keeping right leg straight, drive off left foot into a smooth rack clean, and press overhead.' },
+          3: { label: 'Set 3 of 3 • Alternating Lateral Lunge + Clean (8 kg)', cue: 'Switch to 8 kg! Perform 12 total reps (6/side) alternating right and left lateral lunges with a rack clean—drop the overhead press.' }
+        }
+      },
+      {
+        id: 'oblique_march',
+        num: 9,
+        circuit: 'Circuit 3 • Total Body & Core',
+        title: '9. Oblique Side Bend & Knee March',
+        bell: '8 KG PINK BELL',
+        bellType: '8kg',
+        reps: '8–10 REPS',
+        tempo: 'Bend → Tall March',
+        anim: 'oblique_march',
+        sets: {
+          1: { label: 'Set 1 of 3 • Bell in Right Hand', cue: 'Hold 8 kg at your right side. Perform a controlled lateral side bend to the right, return tall, and march your inside (left) knee to hip height.' },
+          2: { label: 'Set 2 of 3 • Bell in Left Hand', cue: 'Hold 8 kg at your left side. Bend toward the bell, brace core upright, and drive your inside (right) knee slowly to hip height.' },
+          3: { label: 'Set 3 of 3 • Goblet High-Knee March', cue: '16 total slow marches (8/leg) holding the 8 kg pink bell tight at your chest—focus on anti-rotation core stability.' }
+        }
+      }
+    ];
+
+    function buildFullTimeline() {
+      const steps = [];
+      const gap = (o) => steps.push(Object.assign({ type: 'rest', bellSwap: false, bellType: 'rest', tempo: 'Get Set', duration: 10, anim: 'rest_breathe', reps: '10 SEC GET SET', setLabel: 'Quick Reset • 10 Sec' }, o));
+
+      // PHASE 1: DYNAMIC WARM-UP (2:30 = 150s)
+      steps.push({
+        type: 'warmup',
+        phase: 'Phase 1 • Dynamic Warm-Up',
+        title: 'Kang Squats + Shoulder Rotations',
+        setLabel: 'Warm-Up Drill 1 of 4',
+        bell: 'BODYWEIGHT',
+        bellType: 'bw',
+        reps: '40 SEC FLOW',
+        tempo: 'Continuous Mobility',
+        duration: 40,
+        anim: 'warmup_kang',
+        cue: 'Hinge hips back, drop into a deep squat, lift hips, and stand tall; circle arms overhead to lower back at the top.',
+        voiceStart: 'Kang Squats with Shoulder Rotations, using just your bodyweight. Hinge your hips back into a hamstring stretch, drop into a deep squat, lift your hips, and stand tall while circling both arms overhead.',
+        voiceMid: 'Halfway through! Keep your chest lifted as you rise out of each squat.'
+      });
+      steps.push({
+        type: 'warmup',
+        phase: 'Phase 1 • Dynamic Warm-Up',
+        title: 'Step-Back Lunges + Overhead Reach',
+        setLabel: 'Warm-Up Drill 2 of 4',
+        bell: 'BODYWEIGHT',
+        bellType: 'bw',
+        reps: '35 SEC FLOW',
+        tempo: 'Alternating Sides',
+        duration: 35,
+        anim: 'warmup_lunge',
+        cue: 'Step back into a smooth split lunge while reaching both arms straight overhead; alternate legs continuously.',
+        voiceStart: 'Step-Back Lunges with Overhead Reach, bodyweight only. Step one foot back into a smooth lunge while reaching both arms straight overhead to open your hip flexors, alternating legs.',
+        voiceMid: 'Nice rhythm—keep your front knee tracking smoothly over your toes.'
+      });
+      steps.push({
+        type: 'warmup',
+        phase: 'Phase 1 • Dynamic Warm-Up',
+        title: 'Bodyweight Swings + Lateral Lunges',
+        setLabel: 'Warm-Up Drill 3 of 4',
+        bell: 'BODYWEIGHT',
+        bellType: 'bw',
+        reps: '35 SEC FLOW',
+        tempo: '5 Swings + 2 Lunges',
+        duration: 35,
+        anim: 'warmup_swing',
+        cue: 'Perform 5 snappy hip-hinge bodyweight swings followed by 2 wide side-to-side lateral lunges; repeat.',
+        voiceStart: 'Bodyweight Swings and Lateral Lunges, no bell needed yet. Give me five snappy hip-hinge swings, then step wide into two side-to-side lateral lunges, and repeat.',
+        voiceMid: 'Snap those hips tall on the swings and sit deep into your lateral lunges.'
+      });
+      gap({ seg: 0, phase: 'Phase 1 • Dynamic Warm-Up', title: 'Get to the Mat', bell: 'NEXT: MAT',
+        cue: 'Lower down and lie on your back on the mat. Arms and legs ready for dead bugs.',
+        voiceStart: 'Nice flow. Come down to the mat and lie on your back.' });
+      steps.push({
+        type: 'warmup',
+        phase: 'Phase 1 • Dynamic Warm-Up',
+        title: 'Dead Bugs on Mat',
+        setLabel: 'Warm-Up Drill 4 of 4',
+        bell: 'BODYWEIGHT',
+        bellType: 'bw',
+        reps: '40 SEC FLOW',
+        tempo: 'Core Activation',
+        duration: 40,
+        anim: 'warmup_deadbug',
+        cue: 'Press lower back flat into the mat; slowly extend opposite arm and leg while exhaling, alternating sides.',
+        voiceStart: 'Dead Bugs on the mat, bodyweight core activation. Lie on your back, press your lower spine flat into the floor, and slowly extend opposite arm and leg as you exhale.',
+        voiceMid: 'Halfway! Keep your lower back glued to the mat and move with control.'
+      });
+
+      gap({ seg: 0, bellSwap: true, phase: 'Phase 1 • Dynamic Warm-Up', title: 'Stand Up & Grab 8 KG Bell', bell: 'SWAP: 8 KG BELL',
+        cue: 'Roll to your side, push up to standing, and pick up your 8 kg pink bell for Goblet Squats.',
+        voiceStart: 'Roll to your side and stand up. Grab your eight kilo bell.' });
+      // PHASE 2: 3 ROUNDS OF 9 EXERCISES (24:45 = 1485s)
+      // Each round: 9 exercises * 38s (342s) + 8 transitions * 15s (120s) + end water break (33s on R1/R2, 27s before cooldown on R3) = 1485s exact!
+      const VOICE_COACH_SCRIPTS = {
+        1: {
+          1: {
+            start: 'Goblet Squat, pick up your 8 kilogram pink kettlebell. Hold the bell by the horns tight at your chest with elbows tucked in. Lower slowly for three seconds, pause at the bottom, and drive up through your heels for twelve to fourteen reps.',
+            mid: 'Halfway there! Keep your chest proud and elbows tucked inside your knees.'
+          },
+          2: {
+            start: 'Goblet Squat, round two with your 8 kilogram pink kettlebell. Hold it tight at your chest, sink deep for three seconds, pause one second at the bottom, and power straight up.',
+            mid: 'Halfway through set two—keep your core braced and drive evenly through both feet.'
+          },
+          3: {
+            start: 'Final round of Goblet Squats with your 8 kilogram pink kettlebell. Hold by the horns at your chest, lower for three seconds, and add a small bottom pulse before standing tall.',
+            mid: 'Halfway! Finish strong with smooth, controlled depth on every rep.'
+          }
+        },
+        2: {
+          1: {
+            start: 'Staggered Deadlift, using your 8 kilogram pink kettlebell. Plant your right foot forward, pop your left toe behind for balance, hold the bell in your left hand, hinge hips back for three seconds, and snap tall for ten to twelve reps.',
+            mid: 'Halfway! Keep your back flat and slide the pink bell close to your front shin.'
+          },
+          2: {
+            start: 'Staggered Deadlift, switching sides with your 8 kilogram pink kettlebell. Plant your left foot forward, pop your right toe behind, hold the bell in your right hand, hinge three seconds down, and drive hips forward.',
+            mid: 'Halfway there—feel that stretch in your left hamstring and squeeze your glutes at the top.'
+          },
+          3: {
+            start: 'Bilateral Deadlift plus Clean with your 8 kilogram pink kettlebell. Set both feet parallel, hinge down for three seconds, then snap your hips forward to clean the bell smoothly to chest height for twelve reps.',
+            mid: 'Halfway! Use your hip snap to float the bell cleanly to your chest.'
+          }
+        },
+        3: {
+          1: {
+            start: 'Bulgarian Split Lunge with your 8 kilogram pink kettlebell. Place your left laces back on your bench or couch, right foot forward, hold the bell at your side or chest, and lower for three seconds for eight to ten reps.',
+            mid: 'Halfway! Drop your back knee straight down and push through your front right heel.'
+          },
+          2: {
+            start: 'Bulgarian Split Lunge, left leg forward with your 8 kilogram pink kettlebell. Place your right laces on the bench behind you, keep your torso steady, and lower slowly for three seconds.',
+            mid: 'Halfway through! Keep your front knee aligned and drive up strong.'
+          },
+          3: {
+            start: 'Alternating Step-Back Lunge with your 8 kilogram pink kettlebell. Step back into a lunge on the mat and pass the bell smoothly around your front leg at the top for fourteen total reps.',
+            mid: 'Halfway! Stay tall through your chest as you alternate legs.'
+          }
+        },
+        4: {
+          1: {
+            start: 'Three-Point Single-Arm Row with your 8 kilogram pink kettlebell. Brace your left hand on the bench with a flat back, row the bell with your right arm toward your hip pocket, squeeze one second, and lower for three.',
+            mid: 'Halfway! Pull your elbow straight back without twisting your shoulders.'
+          },
+          2: {
+            start: 'Three-Point Single-Arm Row, left arm working with your 8 kilogram pink kettlebell. Brace your right hand firmly on the bench, keep your core tight, and row the bell smoothly toward your left hip.',
+            mid: 'Halfway there—squeeze your shoulder blade at the top and control the three-second lower.'
+          },
+          3: {
+            start: 'Alternating Bent-Over Row with your 8 kilogram pink kettlebell. Stand on the mat in a strong hip hinge, flat back, and alternate rowing the pink bell side to side for fourteen total reps.',
+            mid: 'Halfway! Keep your spine neutral and hips steady as you switch arms.'
+          }
+        },
+        5: {
+          1: {
+            start: 'Kettlebell Shoulder Press, using your lighter 6 kilogram pink kettlebell. Rack the bell at your right shoulder, lock your ribs down over your hips, and press straight overhead for eight to ten reps.',
+            mid: 'Halfway! Keep your abs braced so your lower back stays neutral.'
+          },
+          2: {
+            start: 'Kettlebell Shoulder Press, left arm with your 6 kilogram pink kettlebell. Rack the bell at your left shoulder, squeeze your glutes, press bicep by your ear, and lower slowly for three seconds.',
+            mid: 'Halfway through! Smooth, controlled press straight overhead.'
+          },
+          3: {
+            start: 'Two-Hand Horn Press, upgraded to your 8 kilogram pink kettlebell. Hold the bell by the horns right at chest height and press straight overhead for twelve crisp reps.',
+            mid: 'Halfway! Keep your ribs tucked down as you press the eight kilogram bell overhead.'
+          }
+        },
+        6: {
+          1: {
+            start: 'Hollow Rock Chest Press on the mat with your 8 kilogram pink kettlebell. Hold the bell by the horns over your chest, float your shoulder blades and legs into a hollow hold, and press up for ten to twelve reps.',
+            mid: 'Halfway! Keep your lower back pressed firmly into the mat.'
+          },
+          2: {
+            start: 'Hollow Rock Chest Press, set two with your 8 kilogram pink kettlebell. Hold that hollow body tension—or bend your knees if needed—press straight up, and lower for three seconds until elbows tap.',
+            mid: 'Halfway there—breathe steadily and keep your core engaged.'
+          },
+          3: {
+            start: 'Final round of Hollow Chest Press with your 8 kilogram pink kettlebell. Hold by the horns, maintain your hollow brace, and press with strong, smooth control.',
+            mid: 'Halfway! Just a few more strong chest presses to finish.'
+          }
+        },
+        7: {
+          1: {
+            start: 'Kettlebell Swing, pick up your 8 kilogram pink kettlebell with both hands. Hike the bell deep between your thighs and snap your hips forcefully to float it to chest height for twenty explosive reps.',
+            mid: 'Halfway! Drive through your heels and snap into a tall plank at the top.'
+          },
+          2: {
+            start: 'Kettlebell Swing, round two with your 8 kilogram pink kettlebell. Pack your shoulders down, hinge back cleanly, and power twenty crisp hip-driven swings.',
+            mid: 'Halfway through! Let your hips power the bell, not your arms.'
+          },
+          3: {
+            start: 'Final twenty Kettlebell Swings with your 8 kilogram pink kettlebell. Give me crisp, explosive hip snaps and squeeze your glutes hard at the top of every single rep.',
+            mid: 'Halfway! Ten seconds of power left—finish strong!'
+          }
+        },
+        8: {
+          1: {
+            start: 'Lateral Lunge, Clean and Press with your 6 kilogram pink kettlebell. Step wide to your right sitting hips back, push off to clean the bell to your shoulder rack, and press overhead for eight reps.',
+            mid: 'Halfway! Sit deep into your right hip before driving up into the clean and press.'
+          },
+          2: {
+            start: 'Lateral Lunge, Clean and Press to the left with your 6 kilogram pink kettlebell. Step wide to your left keeping your right leg straight, drive up into a smooth rack clean, and press overhead.',
+            mid: 'Halfway there—smooth transition from the lunge into the rack and press.'
+          },
+          3: {
+            start: 'Alternating Lateral Lunge and Clean, switching up to your 8 kilogram pink kettlebell. Step wide side to side and clean the bell to chest rack on each rep for twelve total reps, skipping the press.',
+            mid: 'Halfway! Alternating right and left with crisp cleans.'
+          }
+        },
+        9: {
+          1: {
+            start: 'Oblique Side Bend and Knee March with your 8 kilogram pink kettlebell in your right hand. Bend sideways to the right, stand tall, and march your left knee slowly up to hip height for eight to ten reps.',
+            mid: 'Halfway! Stand tall between each side bend and balance smoothly on the knee march.'
+          },
+          2: {
+            start: 'Oblique Side Bend and Knee March, switching your 8 kilogram pink kettlebell to your left hand. Bend toward the bell on your left, brace upright, and march your right knee to hip height.',
+            mid: 'Halfway through! Keep your shoulders level and core braced tight.'
+          },
+          3: {
+            start: 'Goblet High-Knee March with your 8 kilogram pink kettlebell. Hold the bell tight at your chest and march alternating knees slowly to hip height for sixteen total marches.',
+            mid: 'Halfway! Resist any torso sway—pure anti-rotation core stability.'
+          }
+        }
+      };
+
+      for (let round = 1; round <= 3; round++) {
+        BASE_CIRCUIT.forEach((ex, idx) => {
+          const setInfo = ex.sets[round];
+          const isSet3BellUpgrade = round === 3 && (ex.num === 5 || ex.num === 8);
+          const activeBell = isSet3BellUpgrade ? '8 KG PINK BELL' : ex.bell;
+          const activeBellType = isSet3BellUpgrade ? '8kg' : ex.bellType;
+          const activeReps = (round === 3 && ex.num === 2) ? '12 REPS'
+            : (round === 3 && (ex.num === 3 || ex.num === 4)) ? '14 TOTAL REPS'
+            : (round === 3 && (ex.num === 5 || ex.num === 8)) ? '12 REPS'
+            : (round === 3 && ex.num === 9) ? '16 MARCHES'
+            : ex.reps;
+          const vScript = VOICE_COACH_SCRIPTS[ex.num][round];
+
+          steps.push({
+            type: 'work',
+            round: round,
+            exNum: ex.num,
+            phase: `Phase 2 • Round ${round}/3 • ${ex.circuit.split('•')[1].trim()}`,
+            title: ex.title,
+            setLabel: setInfo.label,
+            bell: activeBell,
+            bellType: activeBellType,
+            reps: activeReps,
+            tempo: ex.tempo,
+            duration: 38,
+            anim: ex.anim,
+            cue: setInfo.cue,
+            voiceStart: vScript.start,
+            voiceMid: vScript.mid
+          });
+
+          // Breather after exercise
+          if (idx < BASE_CIRCUIT.length - 1) {
+            const nextEx = BASE_CIRCUIT[idx + 1];
+            const nextBellType = (round === 3 && (nextEx.num === 5 || nextEx.num === 8)) ? '8kg' : nextEx.bellType;
+            const nextBell = (round === 3 && (nextEx.num === 5 || nextEx.num === 8)) ? '8 KG' : nextEx.bell.replace(' PINK BELL', '');
+            const isBellSwap = activeBellType !== nextBellType;
+            const _n = nextEx.num, _r12 = round < 3;
+            const restDur = _n === 6 ? 25 : (_n === 3 || _n === 4 || _n === 7) ? 20 : ((_n === 5 || _n === 8 || _n === 9) && _r12) ? 20 : 15;
+            const setupTip = {3: 'Set your back foot on the bench.', 4: 'Set up your bench for the row.', 6: 'Lie back on the mat.', 7: 'Roll up to standing.'}[_n] || '';
+            const cleanNextName = nextEx.title.replace(/^\d+\.\s*/, '');
+            const swapVoice = isBellSwap
+              ? `Swap to your ${nextBell.toLowerCase().replace('kg', 'kilogram')} pink kettlebell now for ${cleanNextName}.`
+              : `Keep your ${nextBell.toLowerCase().replace('kg', 'kilogram')} pink bell ready for ${cleanNextName}.`;
+            steps.push({
+              type: 'rest',
+              round: round,
+              bellSwap: isBellSwap,
+              phase: `Round ${round} of 3 • Quick Breather`,
+              title: isBellSwap ? `Bell Swap → ${nextBell} Pink Bell` : (setupTip ? setupTip.replace(/\.$/, '') : 'Catch Your Breath & Reset'),
+              setLabel: `${restDur}-Sec Transition • Stage ${nextBell} Pink Bell`,
+              bell: isBellSwap ? `SWAP: ${nextBell} BELL` : `NEXT: ${nextBell} BELL`,
+              bellType: 'rest',
+              reps: `${restDur} SEC REST`,
+              tempo: isBellSwap ? 'Switch Kettlebell' : 'Shake Out Grip',
+              duration: restDur,
+              anim: 'rest_breathe',
+              cue: `${isBellSwap ? 'Swap kettlebells now. ' : ''}${setupTip} Take a deep breath, shake out your grip, and get ready for ${nextEx.title} (${nextEx.sets[round].label}).`.replace(/\s+/g, ' ').trim(),
+              voiceStart: `Breather. ${swapVoice} ${setupTip}`.trim()
+            });
+          } else {
+            // End of round water break
+            const isLastRound = round === 3;
+            const waterDur = isLastRound ? 27 : 33;
+            steps.push({
+              type: 'rest',
+              round: round,
+              bellSwap: isLastRound,
+              phase: isLastRound ? 'Strength Complete • Transition' : `End of Round ${round} • Water Break`,
+              title: isLastRound ? 'Grab 6 kg Bell for Cool-Down' : `Round ${round} Complete! Water Breather`,
+              setLabel: isLastRound ? 'Prepare for Spinal Decompression' : `Hydrate & Reset for Round ${round + 1}`,
+              bell: isLastRound ? 'SWAP: 6 KG BELL' : 'HYDRATE',
+              bellType: 'rest',
+              reps: `${waterDur} SEC BREAK`,
+              tempo: 'Deep Nasal Breaths',
+              duration: waterDur,
+              anim: 'rest_breathe',
+              cue: isLastRound
+                ? 'Amazing job finishing all 3 strength rounds! Grab your 6 kg pink kettlebell and slow your breathing for the cool-down.'
+                : `Great round! Sip some water, let your heart rate settle, and get ready for Round ${round + 1} starting with Goblet Squats.`,
+              voiceStart: isLastRound
+                ? 'Amazing job finishing all three strength rounds! Take twenty-seven seconds to catch your breath, and swap to your 6 kilogram pink kettlebell for the decompression cool-down.'
+                : `Round ${round} complete! Take a thirty-three second water breather, slow your breathing, and get ready for Round ${round + 1} starting with Goblet Squats.`
+            });
+          }
+        });
+      }
+
+      // PHASE 3: DECOMPRESSION COOL-DOWN (2:30 = 150s)
+      steps.push({
+        type: 'cooldown',
+        phase: 'Phase 3 • Decompression Cool-Down',
+        title: 'Jefferson Forward Curl',
+        setLabel: 'Cool-Down 1 of 3',
+        bell: '6 KG PINK BELL',
+        bellType: '6kg',
+        reps: '40 SEC STRETCH',
+        tempo: '4s Inhale • 6s Exhale',
+        duration: 40,
+        anim: 'cool_jefferson',
+        cue: 'Hold the 6 kg pink bell with both hands, tuck chin to chest, and slowly roll down one vertebra at a time toward ankles; pause 5s at bottom, roll up.',
+        voiceStart: 'Jefferson Forward Curl with your 6 kilogram pink kettlebell. Hold the bell with both hands, tuck your chin to your chest, and slowly roll down one vertebra at a time toward your ankles.',
+        voiceMid: 'Pause at the bottom, let the weight gently decompress your spine, and roll back up slowly.'
+      });
+      gap({ seg: 4, phase: 'Phase 3 • Decompression Cool-Down', title: 'Come Down to Your Knees', bell: 'NEXT: MAT',
+        cue: 'Place the bell aside and lower into a half-kneeling lunge.',
+        voiceStart: 'Set your bell down. Lower into a half-kneeling lunge.' });
+      steps.push({
+        type: 'cooldown',
+        phase: 'Phase 3 • Decompression Cool-Down',
+        title: 'Kneeling Hip Flexor + Adductor Shift',
+        setLabel: 'Cool-Down 2 of 3 • 25s Right / 25s Left',
+        bell: 'BODYWEIGHT',
+        bellType: 'bw',
+        reps: '50 SEC STRETCH',
+        tempo: 'Switch Sides at 0:25',
+        duration: 50,
+        halfwayChime: 25,
+        anim: 'cool_hipflexor',
+        cue: 'Half-kneeling lunge: tuck pelvis under to stretch the rear hip flexor, then gently glide front knee outward toward 45°. Switch legs at the chime.',
+        voiceStart: 'Kneeling Hip Flexor and Adductor Shift, bodyweight stretch. Come into a half-kneeling lunge, tuck your pelvis under to open the hip flexor, and gently glide your front knee outward.'
+      });
+      steps.push({
+        type: 'cooldown',
+        phase: 'Phase 3 • Decompression Cool-Down',
+        title: 'Tabletop Cat-Cow + Thread-the-Needle',
+        setLabel: 'Cool-Down 3 of 3 • 20s Cat-Cow / 20s Each Side',
+        bell: 'BODYWEIGHT',
+        bellType: 'bw',
+        reps: '60 SEC STRETCH',
+        tempo: 'Chimes at 0:40 & 0:20',
+        duration: 60,
+        customChimes: [40, 20],
+        anim: 'cool_catcow',
+        cue: '20s slow spinal cat-cow on hands and knees, then 20s per side sliding one arm under your torso with shoulder and ear resting on the mat.',
+        voiceStart: 'Tabletop Cat-Cow and Thread the Needle, bodyweight cool-down. Start on hands and knees with twenty seconds of slow, flowing spinal cat-cow breaths.'
+      });
+
+      return steps;
+    }
+
+    const TIMELINE = buildFullTimeline();
+    const TOTAL_SESSION_SECONDS = TIMELINE.reduce((acc, s) => acc + s.duration, 0); // 1785s = 32:00
+
+    // =========================================================================
+    // 2. SMOOTH CANVAS-STYLE SVG ATHLETE RIG & ANIMATION ENGINE
+    // =========================================================================
+    const A = {
+      goblet_squat: { d: 5.0 },
+      staggered_deadlift: { d: 4.4 },
+      bulgarian_lunge: { d: 4.5 },
+      three_point_row: { d: 3.6 },
+      shoulder_press: { d: 4.0 },
+      hollow_chest_press: { d: 4.2 },
+      kb_swing: { d: 2.1 },
+      lateral_lunge_press: { d: 4.2 },
+      oblique_march: { d: 3.6 },
+      warmup_kang: { d: 4.0 },
+      warmup_lunge: { d: 3.6 },
+      warmup_swing: { d: 2.2 },
+      warmup_deadbug: { d: 3.0 },
+      cool_jefferson: { d: 8.0 },
+      cool_hipflexor: { d: 4.0 },
+      cool_catcow: { d: 4.0 },
+      rest_breathe: { d: 4.0 }
+    };
+
+    let currentAnimType = 'warmup_kang';
+    let currentBellWeight = '♥';
+    let animT0 = performance.now();
+
+
+    function animLoop(now) {
+      if (isRunning) {
+        renderAnimFrame(now);
+      }
+      requestAnimationFrame(animLoop);
+    }
+
+    // =========================================================================
+    // 2B. SCREEN WAKE LOCK API (KEEPS SCREEN AWAKE DURING WORKOUT)
+    // =========================================================================
+    let wakeLock = null;
+
+    async function requestWakeLock() {
+      if ('wakeLock' in navigator) {
+        try {
+          wakeLock = await navigator.wakeLock.request('screen');
+          const wt = document.getElementById('wakeText');
+          if (wt) wt.textContent = 'Screen Awake';
+          wakeLock.addEventListener('release', () => {
+            const w = document.getElementById('wakeText');
+            if (w) w.textContent = 'Awake Ready';
+          });
+        } catch (err) {}
+      }
+    }
+
+    function releaseWakeLock() {
+      if (wakeLock) {
+        wakeLock.release().catch(() => {});
+        wakeLock = null;
+      }
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible' && isRunning) {
+        requestWakeLock();
+      }
+    });
+
+    // =========================================================================
+    // 3. MULTI-LAYERED STUDIO AUDIO: FEMALE VOICE COACH + CHILL MUSIC + CHIMES
+    // =========================================================================
+    let audioCtx = null;
+    const AUDIO_PREFS_KEY = 'kbp_audio_prefs_v2';
+    let audioPrefs = { voice: true, music: true, chimes: true, musicLevel: 'low' };
+    try {
+      const savedPrefs = JSON.parse(localStorage.getItem(AUDIO_PREFS_KEY));
+      if (savedPrefs && typeof savedPrefs === 'object') {
+        audioPrefs = { ...audioPrefs, ...savedPrefs };
+      }
+    } catch (e) {}
+
+    function saveAudioPrefs() {
+      try { localStorage.setItem(AUDIO_PREFS_KEY, JSON.stringify(audioPrefs)); } catch (e) {}
+    }
+
+    function triggerHaptic(pattern = 12) {
+      try {
+        if (navigator && typeof navigator.vibrate === 'function') {
+          navigator.vibrate(pattern);
+        }
+      } catch (e) {}
+    }
+
+    // --- 3A. Female Voice Coach (Web Speech API) ---
+    let selectedFemaleVoice = null;
+    let isVoiceSpeaking = false;
+    const COUNTDOWN_WORDS = {
+      10: 'Ten', 9: 'Nine', 8: 'Eight', 7: 'Seven', 6: 'Six',
+      5: 'Five', 4: 'Four', 3: 'Three', 2: 'Two', 1: 'One'
+    };
+
+    function pickBestFemaleVoice() {
+      if (!('speechSynthesis' in window)) return null;
+      const vs = window.speechSynthesis.getVoices();
+      if (!vs || !vs.length) return null;
+      if (audioPrefs.voiceName) { const m = vs.find(v => v.name === audioPrefs.voiceName); if (m) return m; }
+      const bad = /(alex|daniel|fred|tom|aaron|arthur|gordon|oliver|rishi|evan|nathan|ralph|albert|bruce|junior|male|eddy|reed|rocko|grandpa|bad news|bahh|bells|boing|bubbles|cellos|deranged|good news|hysterical|jester|organ|superstar|trinoids|whisper|wobble|zarvox)/i;
+      const fem = /(ava|zoe|allison|samantha|susan|serena|nicky|karen|moira|tessa|fiona|kate|stephanie|victoria|aria|jenny|sonia|libby|female|catherine|isha|veena)/i;
+      let best = null, bs = -1e9;
+      vs.forEach(v => {
+        if (!/^en/i.test(v.lang)) return;
+        let s = 0;
+        if (bad.test(v.name)) s -= 200;
+        if (fem.test(v.name)) s += 40;
+        if (/premium/i.test(v.name)) s += 100; else if (/enhanced/i.test(v.name)) s += 70;
+        if (/natural|neural|online/i.test(v.name)) s += 90;
+        if (/siri/i.test(v.name)) s += 60;
+        if (/compact/i.test(v.name)) s -= 15;
+        if (/^en-US/i.test(v.lang)) s += 5;
+        if (s > bs) { bs = s; best = v; }
+      });
+      return best || vs[0];
+    }
+
+    if ('speechSynthesis' in window) {
+      selectedFemaleVoice = pickBestFemaleVoice();
+      window.speechSynthesis.onvoiceschanged = () => {
+        selectedFemaleVoice = pickBestFemaleVoice();
+        const tag = document.getElementById('voiceStatusTag');
+        if (tag && selectedFemaleVoice) {
+          tag.textContent = selectedFemaleVoice.name.split(' ')[0] + ' Voice';
+        }
+      };
+    }
+
+    // --- 3B. Procedural Slow Chill-Vibe Music Engine (~88 BPM with Auto-Ducking) ---
+    let musicMasterGain = null;
+    let musicTimerId = null;
+
+    function stopChillMusic() {
+      if (musicTimerId) {
+        clearInterval(musicTimerId);
+        musicTimerId = null;
+      }
+      if (audioCtx && musicMasterGain) {
+        try {
+          musicMasterGain.gain.setTargetAtTime(0.0001, audioCtx.currentTime, 0.08);
+        } catch (e) {}
+      }
+    }
+
+    // --- 3C. Timer Chimes & Audio Mixer UI ---
+    function initAudio() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) audioCtx = new AudioContext();
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playTone(freq, duration = 0.16, type = 'sine', gainVal = 0.18, delay = 0) {
+      if (!audioPrefs.chimes) return;
+      initAudio();
+      if (!audioCtx) return;
+
+      const startTime = audioCtx.currentTime + delay;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, startTime);
+
+      gain.gain.setValueAtTime(0.001, startTime);
+      gain.gain.exponentialRampToValueAtTime(gainVal, startTime + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(startTime);
+      osc.stop(startTime + duration + 0.02);
+    }
+
+    function playSoundCue(cueType) {
+      if (!audioPrefs.chimes) return;
+      if (cueType === 'tick') {
+        playTone(660, 0.1, 'sine', 0.14);
+      } else if (cueType === 'start') {
+        playTone(523.25, 0.16, 'triangle', 0.2, 0);
+        playTone(783.99, 0.28, 'triangle', 0.22, 0.12);
+      } else if (cueType === 'rest') {
+        playTone(587.33, 0.18, 'sine', 0.18, 0);
+        playTone(440.00, 0.3, 'sine', 0.18, 0.14);
+      } else if (cueType === 'switch') {
+        playTone(880, 0.14, 'sine', 0.2, 0);
+        playTone(880, 0.18, 'sine', 0.2, 0.16);
+      } else if (cueType === 'complete') {
+        playTone(523.25, 0.2, 'triangle', 0.22, 0);
+        playTone(659.25, 0.2, 'triangle', 0.22, 0.15);
+        playTone(783.99, 0.2, 'triangle', 0.22, 0.30);
+        playTone(1046.50, 0.3, 'triangle', 0.26, 0.45);
+        playTone(1318.51, 0.6, 'triangle', 0.3, 0.62);
+        playTone(1046.50, 0.6, 'sine', 0.14, 0.62);
+      }
+    }
+
+    function syncAudioMixerUI() {
+      const anyOn = audioPrefs.voice || audioPrefs.music || audioPrefs.chimes;
+      document.getElementById('soundOnIcon').classList.toggle('hidden', !anyOn);
+      document.getElementById('soundOffIcon').classList.toggle('hidden', anyOn);
+      document.getElementById('swVoice').classList.toggle('on', audioPrefs.voice);
+      document.getElementById('swMusic').classList.toggle('on', audioPrefs.music);
+      document.getElementById('swChimes').classList.toggle('on', audioPrefs.chimes);
+      document.getElementById('musicVolBtn').textContent = audioPrefs.musicLevel === 'med' ? 'Med' : 'Low';
+    }
+
+    function toggleAudioMixer() {
+      triggerHaptic(10);
+      syncAudioMixerUI();
+      document.getElementById('audioMixerPopover').classList.toggle('hidden');
+    }
+
+    function toggleAudioChannel(channel) {
+      triggerHaptic(12);
+      initAudio();
+      audioPrefs[channel] = !audioPrefs[channel];
+      saveAudioPrefs();
+      syncAudioMixerUI();
+      if (channel === 'voice') {
+        if (audioPrefs.voice) {
+          speakCoach('Voice coach on.', { rate: 1.0 });
+        } else {
+          stopVoice();
+        }
+      } else if (channel === 'music') {
+        if (audioPrefs.music && isRunning) startChillMusic();
+        else stopChillMusic();
+      } else if (channel === 'chimes' && audioPrefs.chimes) {
+        playSoundCue('tick');
+      }
+    }
+
+    document.addEventListener('click', (e) => {
+      const pop = document.getElementById('audioMixerPopover');
+      const btn = document.getElementById('soundToggleBtn');
+      if (pop && !pop.classList.contains('hidden') && !pop.contains(e.target) && !btn.contains(e.target)) {
+        pop.classList.add('hidden');
+      }
+    });
+
+    // =========================================================================
+    // 5. TIMER STATE MACHINE & UI RENDERING
+    // =========================================================================
+    let currentIndex = 0;
+    let remainingSec = TIMELINE[0].duration;
+    let isRunning = false;
+    let timerInterval = null;
+    const completedSteps = new Set();
+    const RING_CIRCUMFERENCE = 263.89;
+
+    function formatTime(sec) {
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      return `${m}:${s < 10 ? '0' : ''}${s}`;
+    }
+
+    function getElapsedSessionSeconds() {
+      let elapsed = 0;
+      for (let i = 0; i < currentIndex; i++) {
+        elapsed += TIMELINE[i].duration;
+      }
+      elapsed += (TIMELINE[currentIndex].duration - remainingSec);
+      return Math.min(elapsed, TOTAL_SESSION_SECONDS);
+    }
+
+    function renderStep() {
+      const step = TIMELINE[currentIndex], nx = TIMELINE[currentIndex + 1];
+      document.body.dataset.t = step.type;
+      const $ = id => document.getElementById(id);
+      const fadeEls = ['exerciseTitle', 'setVariationLabel', 'svgStage'].map($).filter(Boolean);
+      fadeEls.forEach(e => { e.style.opacity = '0'; });
+      $('phaseBadge').textContent = step.phase;
+      $('stepCounter').textContent = `Step ${currentIndex + 1} of ${TIMELINE.length}`;
+      $('bellBadge').dataset.k = step.bellType;
+      $('bellBadge').dataset.swap = step.bellSwap ? '1' : '0';
+      $('bellBadgeText').textContent = step.bell;
+      $('repBadgeText').textContent = step.reps;
+      $('exerciseTitle').textContent = step.title;
+      $('setVariationLabel').textContent = step.setLabel;
+      $('tempoText').textContent = step.tempo;
+      $('tempoPill').style.setProperty('--td', `${(A[step.anim] || A.rest_breathe).d}s`);
+      $('formCueText').textContent = step.cue;
+      $('upNextText').textContent = nx ? `${nx.title} (${nx.bell})` : 'Workout Complete! ✨';
+      const m = (step.bell || '').match(/(\d+)\s*KG/i);
+      setAnim(step.anim, m ? m[1] : '♥');
+      requestAnimationFrame(() => { fadeEls.forEach(e => { e.style.opacity = '1'; }); });
+      animT0 = performance.now();
+      const si = segOf(step);
+      [...$('journey').children].forEach((c, i) => c.className = 'jc' + (i < si ? ' done' : i === si ? ' on' : ''));
+      updateTimerVisuals();
+    }
+
+    function updateTimerVisuals() {
+      const step = TIMELINE[currentIndex], $ = id => document.getElementById(id);
+      $('timerDisplay').textContent = formatTime(remainingSec);
+      $('timerStatusText').textContent = !isRunning ? 'PAUSED' : step.type === 'rest' ? 'BREATHER' : 'ACTIVE';
+      $('timerRing').style.strokeDashoffset = RING_CIRCUMFERENCE * (1 - remainingSec / step.duration);
+      $('ringWrap').dataset.w = (isRunning && remainingSec <= 3) ? 1 : 0;
+      const elapsed = getElapsedSessionSeconds();
+      $('elapsedClock').textContent = formatTime(elapsed);
+      $('overallProgressBar').style.width = `${(elapsed / TOTAL_SESSION_SECONDS) * 100}%`;
+      $('playIcon').classList.toggle('hidden', isRunning);
+      $('pauseIcon').classList.toggle('hidden', !isRunning);
+      $('playPauseLabel').textContent = isRunning ? 'Pause' : (elapsed > 0 ? 'Resume' : 'Start Workout');
+      $('appRoot').classList.toggle('paused', !isRunning);
+    }
+
+    function tick() {
+      if (!isRunning) return;
+      const step = TIMELINE[currentIndex];
+      const nextStepObj = TIMELINE[currentIndex + 1];
+
+      if (remainingSec > 1) {
+        remainingSec--;
+
+        // Mid-set posture / breathing cue at halfway mark on 38s-40s sets
+        if (step.voiceMid && remainingSec === Math.floor(step.duration / 2) && !step.halfwayChime && !step.customChimes) {
+          speakCoach(step.voiceMid, { rate: 0.98 });
+        }
+
+        // 16s remaining: Up Next preview (finishes cleanly before the 10-to-1 countdown)
+        if (remainingSec === 20 && step.type !== 'rest' && nextStepObj) {
+          const cleanNext = nextStepObj.title.replace(/^\d+\.\s*/, '');
+          const upNextSpeak = nextStepObj.type === 'rest'
+            ? (nextStepObj.seg !== undefined ? 'Next, a quick reset.' : 'Almost time for your breather.')
+            : `Coming up next: ${cleanNext}.`;
+          speakCoach(upNextSpeak, { rate: 1.02 });
+          const unEl = document.getElementById('upNextText');
+          if (unEl) { unEl.classList.remove('flash'); void unEl.offsetWidth; unEl.classList.add('flash'); }
+        }
+
+        // Spoken countdown from 10 down to 1 on active intervals (and 3-2-1 on rests)
+        if (step.type !== 'rest' && remainingSec <= 10 && remainingSec >= 1) {
+          const word = remainingSec === 1 ? 'One.' : COUNTDOWN_WORDS[remainingSec];
+          speakCoach(word, { rate: 1.04 });
+        } else if (step.type === 'rest' && remainingSec <= (step.duration > 20 ? 10 : 3) && remainingSec >= 1) {
+          const word = remainingSec === 1 ? 'One.' : COUNTDOWN_WORDS[remainingSec];
+          speakCoach(word, { rate: 1.04 });
+        }
+
+        // Countdown audio chimes & haptics on 3, 2, 1
+        if (remainingSec <= 3 && remainingSec >= 1) {
+          playSoundCue('tick');
+          triggerHaptic(remainingSec === 1 ? [25, 40, 25] : 15);
+        }
+        // Halfway / custom side-switch chimes + voice cues during cool-down
+        if (step.halfwayChime && remainingSec === step.halfwayChime) {
+          playSoundCue('switch');
+          triggerHaptic([30, 50, 30]);
+          document.getElementById('setVariationLabel').textContent = 'SWITCH SIDES NOW! • Left Side';
+          speakCoach('Halfway! Switch legs now and open your left hip flexor.', { rate: 0.98 });
+        }
+        if (step.customChimes && step.customChimes.includes(remainingSec)) {
+          playSoundCue('switch');
+          triggerHaptic([30, 50, 30]);
+          if (remainingSec === 40) {
+            document.getElementById('setVariationLabel').textContent = 'SWITCH! • Thread Right Arm (20s)';
+            speakCoach('Now slide your right arm underneath your torso, resting your shoulder and ear on the mat.', { rate: 0.97 });
+          } else if (remainingSec === 20) {
+            document.getElementById('setVariationLabel').textContent = 'SWITCH! • Thread Left Arm (20s)';
+            speakCoach('Switch sides! Thread your left arm underneath and breathe slowly into your upper back.', { rate: 0.97 });
+          }
+        }
+
+        updateTimerVisuals();
+      } else {
+        completedSteps.add(currentIndex);
+        advanceToNextStep();
+      }
+    }
+
+    function speakCurrentStepStart() {
+      const step = TIMELINE[currentIndex];
+      if (step && step.voiceStart) {
+        speakCoach(step.voiceStart, { rate: 0.97 });
+      }
+    }
+
+    function advanceToNextStep() {
+      if (currentIndex < TIMELINE.length - 1) {
+        currentIndex++;
+        remainingSec = TIMELINE[currentIndex].duration;
+        const nextType = TIMELINE[currentIndex].type;
+        playSoundCue(nextType === 'rest' ? 'rest' : 'start');
+        triggerHaptic(25);
+        renderStep(true);
+        speakCurrentStepStart();
+      } else {
+        // Workout Complete!
+        isRunning = false;
+        clearInterval(timerInterval);
+        timerInterval = null;
+        stopChillMusic();
+        releaseWakeLock();
+        playSoundCue('complete');
+        triggerHaptic([20, 60, 35, 60, 55, 60, 140]);
+        updateTimerVisuals();
+        recordCompletedWorkout();
+        speakCoach('Workout complete! Amazing job finishing the entire thirty-two minute pink kettlebell session.', { rate: 0.96 });
+        openCompletionSummary();
+      }
+    }
+
+    function togglePlay() {
+      triggerHaptic(18);
+      initAudio();
+      isRunning = !isRunning;
+      if (isRunning) {
+        playSoundCue('start');
+        requestWakeLock();
+        startChillMusic();
+        if (remainingSec === TIMELINE[currentIndex].duration) {
+          speakCurrentStepStart();
+        } else {
+          speakCoach('Resuming workout.', { rate: 1.02 });
+        }
+        if (!timerInterval) {
+          timerInterval = setInterval(tick, 1000);
+        }
+      } else {
+        stopChillMusic();
+        stopVoice();
+        releaseWakeLock();
+      }
+      updateTimerVisuals();
+    }
+
+    function nextStep(markCompleted = false) {
+      triggerHaptic(14);
+      initAudio();
+      if (markCompleted) completedSteps.add(currentIndex);
+      if (currentIndex < TIMELINE.length - 1) {
+        currentIndex++;
+        remainingSec = TIMELINE[currentIndex].duration;
+        if (isRunning) {
+          playSoundCue(TIMELINE[currentIndex].type === 'rest' ? 'rest' : 'start');
+          speakCurrentStepStart();
+        } else {
+          stopVoice();
+        }
+        renderStep(true);
+      } else {
+        isRunning = false;
+        clearInterval(timerInterval);
+        timerInterval = null;
+        stopChillMusic();
+        releaseWakeLock();
+        playSoundCue('complete');
+        triggerHaptic([20, 60, 35, 60, 55, 60, 140]);
+        recordCompletedWorkout();
+        openCompletionSummary();
+      }
+    }
+
+    function prevStep() {
+      triggerHaptic(14);
+      initAudio();
+      if (currentIndex > 0) {
+        currentIndex--;
+        remainingSec = TIMELINE[currentIndex].duration;
+        renderStep(true);
+        if (isRunning) speakCurrentStepStart();
+        else stopVoice();
+      } else {
+        remainingSec = TIMELINE[0].duration;
+        updateTimerVisuals();
+      }
+    }
+
+    function jumpToStep(idx) {
+      triggerHaptic(14);
+      initAudio();
+      currentIndex = idx;
+      remainingSec = TIMELINE[idx].duration;
+      renderStep(true);
+      if (isRunning) speakCurrentStepStart();
+      else stopVoice();
+      closeModal('timelineModal');
+    }
+
+    function resetWorkout() {
+      isRunning = false;
+      clearInterval(timerInterval);
+      timerInterval = null;
+      stopChillMusic();
+      stopVoice();
+      releaseWakeLock();
+      completedSteps.clear();
+      currentIndex = 0;
+      remainingSec = TIMELINE[0].duration;
+      renderStep(true);
+      renderTimelineDrawer();
+    }
+
+
+    // =========================================================================
+    // 6. WEEKLY PROGRESS LOGGER (MON–SUN CHECK-IN + SUNDAY WRAP-UP)
+    // =========================================================================
+    const DAYS_SHORT = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    const DAYS_FULL = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const WEEKLY_STORE_KEY = 'kbp_weekly_log_v2';
+
+    function getISOWeekKey(d = new Date()) {
+      const date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+      const dayNum = date.getUTCDay() || 7;
+      date.setUTCDate(date.getUTCDate() + 4 - dayNum);
+      const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+      const weekNo = Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
+      return `${date.getUTCFullYear()}-W${String(weekNo).padStart(2, '0')}`;
+    }
+
+    function getTodayMonSunIndex() {
+      return (new Date().getDay() + 6) % 7; // Mon=0 ... Sun=6
+    }
+
+    function getCurrentHHMM() {
+      const now = new Date();
+      return `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+    }
+
+    function format12Hour(hhmm) {
+      if (!hhmm || !hhmm.includes(':')) return hhmm || 'Completed';
+      const [hStr, mStr] = hhmm.split(':');
+      let h = parseInt(hStr, 10);
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      h = h % 12 || 12;
+      return `${h}:${mStr} ${ampm}`;
+    }
+
+    let selectedDayIdx = getTodayMonSunIndex();
+    let selectedTimeStr = getCurrentHHMM();
+
+    function loadWeeklyData() {
+      const weekKey = getISOWeekKey();
+      try {
+        const raw = JSON.parse(localStorage.getItem(WEEKLY_STORE_KEY));
+        if (raw && raw.weekKey === weekKey && raw.days) {
+          return raw;
+        }
+      } catch (e) {}
+      return { weekKey, days: {} };
+    }
+
+    function saveWeeklyData(data) {
+      try { localStorage.setItem(WEEKLY_STORE_KEY, JSON.stringify(data)); } catch (e) {}
+      updateHeaderWeekBadge();
+    }
+
+    function updateHeaderWeekBadge() {
+      const data = loadWeeklyData();
+      const count = Object.keys(data.days).length;
+      const badge = document.getElementById('weekCountBadge');
+      const dayTag = document.getElementById('weekDayTag');
+      if (badge) badge.textContent = `${count}/7`;
+      if (dayTag) dayTag.textContent = DAYS_SHORT[selectedDayIdx];
+    }
+
+    function renderWeekStrip(containerId, interactive = true) {
+      const data = loadWeeklyData();
+      const el = document.getElementById(containerId);
+      if (!el) return;
+      el.innerHTML = DAYS_SHORT.map((d, idx) => {
+        const rec = data.days[idx];
+        const isDone = !!rec;
+        const isSel = idx === selectedDayIdx;
+        return `<button type="button" class="wk-d ${isDone ? 'done' : ''} ${isSel ? 'sel' : ''}" onclick="${interactive ? `handleWeekPillTap(${idx})` : ''}">
+          <span>${d}</span>
+          <i>${isDone ? '✓' : ''}</i>
+        </button>`;
+      }).join('');
+    }
+
+    function handleWeekPillTap(idx) {
+      triggerHaptic(12);
+      const data = loadWeeklyData();
+      if (selectedDayIdx === idx) {
+        // Tapping the already-selected day toggles retroactive completion
+        if (data.days[idx]) {
+          delete data.days[idx];
+        } else {
+          const tVal = document.getElementById('sessionTimeInput').value || selectedTimeStr || getCurrentHHMM();
+          data.days[idx] = {
+            day: DAYS_FULL[idx],
+            time: format12Hour(tVal),
+            durationSec: TOTAL_SESSION_SECONDS,
+            bells: '6 & 8 kg'
+          };
+        }
+        saveWeeklyData(data);
+      } else {
+        selectedDayIdx = idx;
+      }
+      renderWeekStrip('checkInWeekStrip', true);
+      updateCheckInLabel();
+      updateHeaderWeekBadge();
+    }
+
+    function updateCheckInLabel() {
+      const data = loadWeeklyData();
+      const count = Object.keys(data.days).length;
+      const lbl = document.getElementById('checkInWeekLabel');
+      if (lbl) {
+        lbl.textContent = `${DAYS_FULL[selectedDayIdx]} • ${count} of 7 days logged this week`;
+      }
+    }
+
+    function openCheckInModal(allowSummary = false) {
+      selectedTimeStr = getCurrentHHMM();
+      const timeInput = document.getElementById('sessionTimeInput');
+      if (timeInput) timeInput.value = selectedTimeStr;
+      renderWeekStrip('checkInWeekStrip', true);
+      updateCheckInLabel();
+      openModal('checkInModal');
+    }
+
+    function confirmCheckInAndStart() {
+      triggerHaptic(16);
+      initAudio();
+      const timeInput = document.getElementById('sessionTimeInput');
+      if (timeInput && timeInput.value) {
+        selectedTimeStr = timeInput.value;
+      }
+      updateHeaderWeekBadge();
+      closeModal('checkInModal');
+    }
+
+    function recordCompletedWorkout() {
+      const data = loadWeeklyData();
+      const timeInput = document.getElementById('sessionTimeInput');
+      const rawTime = (timeInput && timeInput.value) || selectedTimeStr || getCurrentHHMM();
+      data.days[selectedDayIdx] = {
+        day: DAYS_FULL[selectedDayIdx],
+        time: format12Hour(rawTime),
+        durationSec: TOTAL_SESSION_SECONDS,
+        bells: '6 & 8 kg'
+      };
+      saveWeeklyData(data);
+    }
+
+    function openCompletionSummary() {
+      const data = loadWeeklyData();
+      const completedIndices = Object.keys(data.days).map(Number).sort((a, b) => a - b);
+      const count = completedIndices.length;
+      const isSundayWrapUp = selectedDayIdx === 6 || !!data.days[6];
+
+      renderWeekStrip('completeWeekStrip', false);
+
+      const totalMins = Math.round((count * TOTAL_SESSION_SECONDS) / 60);
+      const totalSets = count * 27; // 9 moves * 3 rounds = 27 sets per session
+
+      if (isSundayWrapUp) {
+        document.getElementById('completeIcon').textContent = '🏆';
+        document.getElementById('completeTitle').textContent = 'Sunday Weekly Wrap-Up!';
+        document.getElementById('completeSubtitle').innerHTML = `Incredible consistency! You completed <b>${count} of 7 days</b> this week with your 6 kg &amp; 8 kg pink kettlebells.`;
+        document.getElementById('completeStats').innerHTML = `
+          <div>${count} / 7<small>Days Active</small></div>
+          <div>${totalMins}m<small>Weekly Time</small></div>
+          <div>${totalSets} Sets<small>Completed</small></div>`;
+        const logEl = document.getElementById('sundayLogList');
+        logEl.innerHTML = completedIndices.map(idx => {
+          const rec = data.days[idx];
+          return `<div class="wk-li"><span>✓ ${rec.day}</span><small>${rec.time} • 32:00 (${rec.bells})${rec.rating ? ' • ' + '★'.repeat(rec.rating) : ''}</small></div>`;
+        }).join('');
+        document.getElementById('sundaySummaryArea').classList.remove('hidden');
+      } else {
+        document.getElementById('completeIcon').textContent = '✨';
+        document.getElementById('completeTitle').textContent = `${DAYS_FULL[selectedDayIdx]} Logged!`;
+        document.getElementById('completeSubtitle').innerHTML = `Marked <b>${DAYS_FULL[selectedDayIdx]} (${format12Hour(selectedTimeStr)})</b> complete! You’ve logged <b>${count} of 7 days</b> so far this week.`;
+        document.getElementById('completeStats').innerHTML = `
+          <div>32:00<small>Session Time</small></div>
+          <div>${count} / 7<small>Week Progress</small></div>
+          <div>6 &amp; 8 kg<small>Pink Bells</small></div>`;
+        document.getElementById('sundaySummaryArea').classList.add('hidden');
+      }
+
+      openModal('completeModal');
+    }
+
+    function shareWeeklySummary() {
+      triggerHaptic(14);
+      const data = loadWeeklyData();
+      const completedIndices = Object.keys(data.days).map(Number).sort((a, b) => a - b);
+      const count = completedIndices.length;
+      const totalMins = Math.round((count * TOTAL_SESSION_SECONDS) / 60);
+      const lines = [
+        `🩷 KettlebellPink Weekly Wrap-Up (${data.weekKey})`,
+        `• Days Completed: ${count}/7`,
+        `• Total Training Time: ${totalMins} mins (${count * 27} sets)`,
+        ...completedIndices.map(i => `  ✓ ${data.days[i].day} at ${data.days[i].time} (32:00)${data.days[i].rating ? ' ' + '★'.repeat(data.days[i].rating) : ''}`)
+      ];
+      const text = lines.join('\n');
+      if (navigator.share) {
+        navigator.share({ title: 'KettlebellPink Weekly Summary', text }).catch(() => {});
+      } else {
+        const showCopiedMsg = () => {
+          document.getElementById('completeSubtitle').innerHTML = '<b>Weekly summary copied!</b> Paste it anywhere to share your progress.';
+        };
+        const legacyCopy = () => {
+          try {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            showCopiedMsg();
+          } catch (e) {}
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(showCopiedMsg).catch(legacyCopy);
+        } else {
+          legacyCopy();
+        }
+      }
+    }
+
+    function resetCurrentWeek() {
+      triggerHaptic(16);
+      saveWeeklyData({ weekKey: getISOWeekKey(), days: {} });
+      renderWeekStrip('completeWeekStrip', false);
+      document.getElementById('sundaySummaryArea').classList.add('hidden');
+      document.getElementById('completeSubtitle').innerHTML = 'Fresh week started! Ready whenever you are for your next session.';
+    }
+
+
+    // =========================================================================
+    // 7. TIMELINE DRAWER, MODALS & INIT
+    // =========================================================================
+    // 6. TIMELINE DRAWER, MODALS & INIT
+    // =========================================================================
+    const SEGS = ['Warm-Up', 'Round 1', 'Round 2', 'Round 3', 'Cool-Down'];
+    const segOf = s => s.seg !== undefined ? s.seg : s.type === 'warmup' ? 0 : s.type === 'cooldown' ? 4 : s.round;
+
+    function renderTimelineDrawer() {
+      document.getElementById('timelineList').innerHTML = TIMELINE.map((s, i) => {
+        const cur = i === currentIndex, done = completedSteps.has(i);
+        return `<div class="ti ${s.type === 'rest' ? 'rest' : ''} ${cur ? 'cur' : ''}" onclick="jumpToStep(${i})">
+          <div class="tn ${done ? 'dn' : ''}">${done ? '✓' : i + 1}</div>
+          <div class="tt"><b>${s.title}</b><small>${s.setLabel}</small></div>
+          <div class="tg"><em>${s.bell.replace(' PINK BELL', '')}</em>${s.duration}s</div></div>`;
+      }).join('');
+    }
+
+    function openModal(id) {
+      if (id === 'timelineModal') renderTimelineDrawer();
+      const m = document.getElementById(id);
+      if (_modalCloseTimers[id]) { clearTimeout(_modalCloseTimers[id]); delete _modalCloseTimers[id]; }
+      m.classList.remove('hidden', 'closing');
+      if (id === 'timelineModal') { const c = m.querySelector('.cur'); if (c) c.scrollIntoView({ block: 'center' }); }
+      if (id === 'completeModal') {
+        const box = document.getElementById('confBox');
+        box.querySelectorAll('.conf').forEach(e => e.remove());
+        const cols = ['#F43F8E', '#FB7185', '#C084FC', '#FBBF24', '#34D399', '#F9A8D4'];
+        for (let i = 0; i < 44; i++) {
+          const c = document.createElement('span');
+          c.className = 'conf';
+          c.style.cssText = `left:${Math.random() * 100}%;background:${cols[i % 6]};animation-delay:${Math.random() * .9}s`;
+          box.appendChild(c);
+        }
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('journey').innerHTML = SEGS.map(s => `<div class="jc">${s}</div>`).join('');
+      if (navigator.standalone || matchMedia('(display-mode: standalone)').matches) document.getElementById('installBtn').classList.add('hidden');
+      syncAudioMixerUI();
+      updateHeaderWeekBadge();
+      renderStep();
+      requestAnimationFrame(animLoop);
+      // Prompt day & timing check-in on launch
+      openCheckInModal(false);
+    });
+  </script>
+
+<script>
+// ===== v3 upgrades (override earlier definitions) =====
+try { if (!localStorage.getItem(AUDIO_PREFS_KEY)) audioPrefs.musicLevel = 'med'; } catch (e) {}
+
+// ---- Natural female coach voice: phrase-by-phrase delivery ----
+const _busy = () => _vPlaying || _vPending;
+function _phr(text) {
+  const out = [];
+  (text.replace(/\s+/g, ' ').match(/[^.!?]+[.!?]*/g) || [text]).forEach(s => {
+    s = s.trim(); if (!s) return;
+    if (s.split(' ').length > 14) {
+      const m = s.indexOf(',', Math.floor(s.length * .35));
+      if (m > 0 && m < s.length * .75) { out.push(s.slice(0, m + 1)); out.push(s.slice(m + 1).trim()); return; }
+    }
+    out.push(s);
+  });
+  return out;
+}
+function _localVoice() {
+  const l = speechSynthesis.getVoices().filter(v => v.localService && /^en/i.test(v.lang) && !/(david|mark|alex|daniel|fred|tom|aaron|arthur|oliver|rishi)/i.test(v.name));
+  return l.find(v => /(zira|samantha|ava|zoe|allison|susan|karen|moira|tessa|serena|nicky|female)/i.test(v.name)) || l[0] || null;
+}
+const _est = p => p.t.split(' ').length / (_wps * p.r) + p.g / 1000;
+function _vNext(t) {
+  if (t !== _vt) return;
+  _vPending = false;
+  const p = _vq.shift();
+  if (!p) {
+    _vPlaying = false;
+    setTimeout(() => { if (t === _vt && !_vPlaying) { isVoiceSpeaking = false; updateMusicDucking(); } }, 260);
+    return;
+  }
+  _vPlaying = true;
+  const u = new SpeechSynthesisUtterance(p.t), n = p.t.split(' ').length;
+  const _v = p.nv ? null : (p.c && selectedFemaleVoice && selectedFemaleVoice.localService === false ? (_localVoice() || selectedFemaleVoice) : selectedFemaleVoice);
+  if (_v) { u.voice = _v; u.lang = _v.lang; } else u.lang = 'en-US';
+  u.rate = p.r; u.pitch = p.p; u.volume = 1;
+  let done = false, w, t0 = 0;
+  const go = () => {
+    if (done) return; done = true; clearTimeout(w);
+    if (t0 && n > 3) { const v = n / (((performance.now() - t0) / 1000) * p.r); if (v > 1 && v < 5) _wps = _wps * .7 + v * .3; }
+    setTimeout(() => _vNext(t), p.g);
+  };
+  w = setTimeout(go, n <= 3 ? 750 : Math.max(2500, _est(p) * 1500 + 1500));
+  u.onstart = () => {
+    t0 = performance.now(); isVoiceSpeaking = true;
+    if (audioCtx && audioCtx.state !== 'running') audioCtx.resume().catch(() => {});
+    updateMusicDucking();
+  };
+  u.onend = go;
+  u.onerror = e => { if (!p.nv && e && e.error !== 'interrupted' && e.error !== 'canceled') { p.nv = true; _vq.unshift(p); } go(); };
+  _vRefs = [u];
+  try { speechSynthesis.speak(u); } catch (e) { go(); }
+}
+function speakCoach(text, opts = {}) {
+  if (text) text = text.replace(/^Halfway( there)?[!,.\s\u2014-]*/i, '');
+  if (!audioPrefs.voice || !text || !('speechSynthesis' in window)) return;
+  if (!selectedFemaleVoice) selectedFemaleVoice = pickBestFemaleVoice();
+  const st = TIMELINE[currentIndex] || {};
+  const calm = st.type === 'cooldown' || st.type === 'rest';
+  const isCount = text.split(' ').length <= 4 && /^(One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten)\b/.test(text);
+  const isNext = /^(Coming up next|Almost time for your breather|Next, a quick reset)/.test(text);
+  let items = _phr(text).map(t => {
+    const ex = /!\s*$/.test(t), short = t.split(' ').length <= 3;
+    return {
+      t,
+      r: Math.min(1.25, (opts.rate || 1) * (calm ? .92 : .97) * (ex ? 1.04 : 1)),
+      p: (calm ? 1.02 : 1.07) + (ex ? .05 : 0),
+      g: short ? 0 : /[.!]$/.test(t) ? 260 : 140
+    };
+  });
+  let interrupt = opts.interrupt !== false;
+  if (isCount) {                       // never cut a sentence for a number, except the final 3-2-1
+    interrupt = false;     // never cancel for a number (cancel/speak every second wedges iOS speech)
+    _vq = _vq.filter(x => !x.c);   // a late number is stale: skip it so the voice never trails the screen
+    items.forEach(i => { i.c = true; i.r = .94; i.p = 1.0; });
+    if (speechSynthesis.pending) { _vt++; _vq = []; _vPlaying = false; _vPending = false; try { speechSynthesis.cancel(); } catch (e) {} }   // stale backlog: reset once
+  } else if (isNext) {                 // preview only if the coach is free
+    if (_busy()) return;
+    interrupt = false;
+  } else if (interrupt && items.length > 1) {   // fit instructions inside the time before the 15s preview / countdown
+    const budget = remainingSec - (st.type === 'rest' ? (st.duration > 20 ? 11 : 4) : 21);
+    if (budget > 4) {
+      let acc = 0; const keep = [];
+      for (const it of items) { const e = _est(it); if (keep.length >= 2 && acc + e > budget) break; keep.push(it); acc += e; }
+      items = keep;
+    }
+  }
+  if (interrupt) {
+    _vt++; _vq = items; _vPlaying = false; _vPending = true;
+    try { speechSynthesis.cancel(); speechSynthesis.resume(); } catch (e) {}
+    const t = _vt; setTimeout(() => _vNext(t), 120);
+  } else {
+    _vq = _vq.concat(items);
+    if (!_busy()) { _vPending = true; _vNext(_vt); }
+  }
+}
+function stopVoice() {
+  _vt++; _vq = []; _vPlaying = false; _vPending = false; isVoiceSpeaking = false; updateMusicDucking();
+  try { speechSynthesis.cancel(); } catch (e) {}
+}
+setInterval(() => { if (isRunning && audioCtx && audioCtx.state !== 'running') audioCtx.resume().catch(() => {}); }, 1500);
+
+// ---- Louder background music that makes room for the voice ----
+const _LV = { low: .22, med: .42, high: .62 };
+function getTargetMusicGain() {
+  if (!audioPrefs.music || !isRunning) return 0.0001;
+  const b = _LV[audioPrefs.musicLevel] || .3;
+  return isVoiceSpeaking ? b * .55 : b;
+}
+function updateMusicDucking() {
+  if (!audioCtx || !musicMasterGain) return;
+  const n = audioCtx.currentTime, sp = isVoiceSpeaking;
+  musicMasterGain.gain.cancelScheduledValues(n);
+  musicMasterGain.gain.setTargetAtTime(getTargetMusicGain(), n, sp ? .06 : .35);
+  if (window._duckLP) window._duckLP.frequency.setTargetAtTime(sp ? 4500 : 18000, n, sp ? .08 : .4);
+}
+function startChillMusic() {
+  initAudio();
+  if (!audioCtx || !audioPrefs.music || !isRunning) return;
+  if (!musicMasterGain) {
+    musicMasterGain = audioCtx.createGain();
+    musicMasterGain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+    const lp = audioCtx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 18000; window._duckLP = lp;
+    const c = audioCtx.createDynamicsCompressor();
+    c.threshold.value = -14; c.knee.value = 12; c.ratio.value = 4; c.attack.value = .01; c.release.value = .25;
+    musicMasterGain.connect(lp); lp.connect(c); c.connect(audioCtx.destination);
+  }
+  if (audioCtx.state !== 'running') audioCtx.resume().then(updateMusicDucking).catch(() => {});
+  updateMusicDucking();
+  [150, 600, 1500].forEach(ms => setTimeout(() => { if (isRunning) updateMusicDucking(); }, ms));
+  if (!musicTimerId) { scheduleMusicBeat(); musicTimerId = setInterval(scheduleMusicBeat, (60 / 88 / 2) * 1000); }
+}
+function cycleMusicLevel() {
+  triggerHaptic(10);
+  audioPrefs.musicLevel = audioPrefs.musicLevel === 'low' ? 'med' : audioPrefs.musicLevel === 'med' ? 'high' : 'low';
+  saveAudioPrefs(); syncAudioMixerUI(); updateMusicDucking();
+}
+const _sm = syncAudioMixerUI;
+syncAudioMixerUI = function () { _sm(); document.getElementById('musicVolBtn').textContent = { low: 'Low', med: 'Med', high: 'High' }[audioPrefs.musicLevel] || 'Med'; };
+
+// ---- iOS audio session, resume after interruptions ----
+const _ia = initAudio;
+initAudio = function () {
+  _ia();
+  if (audioCtx && audioCtx.state !== 'running') audioCtx.resume().catch(() => {});
+};
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible' && audioCtx && audioCtx.state !== 'running') audioCtx.resume().catch(() => {});
+});
+
+// ---- Clearer on-screen instructions, Skip label, smooth pause/resume, sheet exit ----
+const _rs = renderStep;
+renderStep = function (a) {
+  _rs(a);
+  const st = TIMELINE[currentIndex], el = document.getElementById('formCueText');
+  const parts = (st.cue || '').match(/[^.!?]+[.!?]*/g) || [st.cue || ''];
+  el.innerHTML = parts.map(s => s.trim()).filter(Boolean).map(s => '<span class="cs">' + s + '</span>').join('');
+  document.getElementById('nextBtnLabel').textContent = st.type === 'rest' ? 'Skip' : 'Done';
+};
+let _pauseAt = 0;
+const _tp = togglePlay;
+togglePlay = function () {
+  const was = isRunning, t = performance.now();
+  _tp();
+  if (was) _pauseAt = t; else if (_pauseAt) { animT0 += performance.now() - _pauseAt; _pauseAt = 0; }
+};
+const _modalCloseTimers = {};
+function closeModal(id) {
+  if (id === 'completeModal') { try { if (localStorage.getItem('kbp_wrap_pending')) { localStorage.removeItem('kbp_wrap_pending'); saveWeeklyData({ weekKey: getISOWeekKey(), days: {} }); } } catch (e) {} }
+  const m = document.getElementById(id);
+  if (!m || m.classList.contains('hidden')) return;
+  m.classList.add('closing');
+  _modalCloseTimers[id] = setTimeout(() => { m.classList.add('hidden'); m.classList.remove('closing'); delete _modalCloseTimers[id]; }, 230);
+}
+
+const _ocs = openCompletionSummary;
+openCompletionSummary = function () {
+  _ocs();
+  try { const d = loadWeeklyData(); if (selectedDayIdx === 6 || d.days[6]) localStorage.setItem('kbp_wrap_pending', '1'); } catch (e) {}
+};
+try { if (localStorage.getItem('kbp_wrap_pending')) { localStorage.removeItem('kbp_wrap_pending'); saveWeeklyData({ weekKey: getISOWeekKey(), days: {} }); } } catch (e) {}
+
+// ---- Voice picker in the mixer ----
+function _fillVoices() {
+  const s = document.getElementById('voiceSel');
+  if (!s || !('speechSynthesis' in window)) return;
+  const vs = speechSynthesis.getVoices().filter(v => /^en/i.test(v.lang));
+  selectedFemaleVoice = pickBestFemaleVoice();
+  const cur = selectedFemaleVoice && selectedFemaleVoice.name;
+  s.innerHTML = vs.map(v => '<option value="' + v.name.replace(/"/g, '') + '"' + (v.name === cur ? ' selected' : '') + '>' + v.name.replace(/</g, '') + ' · ' + v.lang + '</option>').join('');
+  const tag = document.getElementById('voiceStatusTag');
+  if (tag && cur) tag.textContent = cur.split(' ')[0] + ' Voice';
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const first = document.querySelector('#audioMixerPopover .mx-row');
+  if (first) first.insertAdjacentHTML('afterend',
+    '<div class="mx-row"><div class="mx-lbl"><span>Coach voice</span><small>Premium or Enhanced voices sound most natural</small></div><select id="voiceSel" class="time-in" style="max-width:128px;font-size:12px;padding:6px 8px"></select></div>');
+  const sel = document.getElementById('voiceSel');
+  if (sel) sel.addEventListener('change', () => {
+    audioPrefs.voiceName = sel.value; saveAudioPrefs(); selectedFemaleVoice = pickBestFemaleVoice();
+    speakCoach("Alright, let's get moving! Chest up, and breathe.");
+  });
+  [0, 600, 2000].forEach(ms => setTimeout(_fillVoices, ms));
+  if ('speechSynthesis' in window) speechSynthesis.addEventListener('voiceschanged', _fillVoices);
+});
+</script>
+<script>
+TIMELINE.forEach(s => { delete s.voiceMid; });
+(function(){
+const p = (...a) => { while (a.length < 12) a.push(0); return a; };
+    const OH = [172,178], LEG0 = [0,0,-3,0];
+    const A2 = {
+      goblet_squat:{d:5,bell:'both',a:'f',k:[[0,p(0,0,20,150,20,150,0,0,-2,0)],[.6,p(28,0,20,150,20,150,88,-12,88,-12)],[.8,p(28,0,20,150,20,150,88,-12,88,-12)],[1,p(0,0,20,150,20,150,0,0,-2,0)]]},
+      staggered_deadlift:{d:4.4,bell:'f',a:'f',k:[[0,p(5,0,0,0,0,0,8,-6,-12,-26)],[.55,p(68,-10,4,2,4,2,22,-14,-12,-26)],[.7,p(68,-10,4,2,4,2,22,-14,-12,-26)],[1,p(5,0,0,0,0,0,8,-6,-12,-26)]]},
+      bulgarian_lunge:{d:4.5,bell:'f',a:'b',box:[56,34,31],k:[[0,p(4,0,0,0,0,0,25,-8,-22,-80)],[.55,p(8,0,0,0,0,0,55,-30,-30,-105)],[.72,p(8,0,0,0,0,0,55,-30,-30,-105)],[1,p(4,0,0,0,0,0,25,-8,-22,-80)]]},
+      three_point_row:{d:3.6,bell:'b',a:'f',box:[138,32,38],k:[[0,p(75,-5,0,0,0,0,25,-20,-20,-35)],[.4,p(75,-5,0,0,-70,-10,25,-20,-20,-35)],[.55,p(75,-5,0,0,-70,-10,25,-20,-20,-35)],[1,p(75,-5,0,0,0,0,25,-20,-20,-35)]]},
+      shoulder_press:{d:4,bell:'f',a:'f',k:[[0,p(0,0,25,170,12,-8,0,0,-3,0,0,180)],[.35,p(0,-3,172,178,12,-8,0,0,-3,0,0,180)],[.5,p(0,-3,172,178,12,-8,0,0,-3,0,0,180)],[1,p(0,0,25,170,12,-8,0,0,-3,0,0,180)]]},
+      hollow_chest_press:{d:4.2,bell:'both',a:'h',mat:1,k:[[0,p(-80,5,30,175,30,175,108,108,104,104)],[.35,p(-80,5,180,180,180,180,108,108,104,104)],[.5,p(-80,5,180,180,180,180,108,108,104,104)],[1,p(-80,5,30,175,30,175,108,108,104,104)]]},
+      kb_swing:{d:2.1,bell:'f',a:'f',k:[[0,p(55,-10,-45,-55,-45,-55,45,-25,40,-28)],[.45,p(0,0,85,88,85,88,3,0,-3,0)],[1,p(55,-10,-45,-55,-45,-55,45,-25,40,-28)]]},
+      lateral_lunge_press:{d:4.2,bell:'f',a:'f',k:[[0,p(0,0,0,0,10,-5,0,0,-3,0)],[.25,p(18,0,5,0,10,-5,50,-20,-34,-34)],[.5,p(0,0,25,170,10,-5,0,0,-3,0,0,180)],[.7,p(0,-3,172,178,10,-5,0,0,-3,0,0,180)],[.85,p(0,0,25,170,10,-5,0,0,-3,0,0,180)],[1,p(0,0,0,0,10,-5,0,0,-3,0)]]},
+      oblique_march:{d:3.6,bell:'f',a:'h',k:[[0,p(0,0,0,0,10,-5,0,0,-3,0)],[.25,p(8,0,0,0,10,-5,90,0,-3,0)],[.5,p(0,0,0,0,10,-5,0,0,-3,0)],[.75,p(8,0,0,0,10,-5,0,0,90,0)],[1,p(0,0,0,0,10,-5,0,0,-3,0)]]},
+      warmup_kang:{d:4,a:'f',k:[[0,p(0,0,175,178,175,178,0,0,-3,0)],[.3,p(55,0,95,95,95,95,22,-14,22,-14)],[.6,p(32,0,60,70,60,70,88,-12,88,-12)],[.8,p(5,0,140,165,140,165,0,0,-3,0)],[1,p(0,0,175,178,175,178,0,0,-3,0)]]},
+      warmup_lunge:{d:3.6,a:'f',k:[[0,p(0,0,...OH,...OH,...LEG0)],[.5,p(0,0,...OH,...OH,70,-8,-5,-70)],[1,p(0,0,...OH,...OH,...LEG0)]]},
+      warmup_swing:{d:2.2,a:'f',k:[[0,p(55,-10,-45,-55,-45,-55,45,-25,40,-28)],[.45,p(0,0,85,88,85,88,3,0,-3,0)],[1,p(55,-10,-45,-55,-45,-55,45,-25,40,-28)]]},
+      warmup_deadbug:{d:3,a:'h',mat:1,k:[[0,p(-90,0,-90,-90,180,180,180,90,90,90)],[.5,p(-90,0,180,180,-90,-90,90,90,180,90)],[1,p(-90,0,-90,-90,180,180,180,90,90,90)]]},
+      cool_jefferson:{d:8,bell:'both',a:'f',k:[[0,p(0,0,0,0,0,0,0,0,-2,0)],[.45,p(100,35,0,0,0,0,0,0,-2,0,14)],[.6,p(100,35,0,0,0,0,0,0,-2,0,14)],[1,p(0,0,0,0,0,0,0,0,-2,0)]]},
+      cool_hipflexor:{d:4,a:'f',mat:1,k:[[0,p(0,0,15,60,15,60,88,0,-3,-85)],[.5,p(-6,0,15,60,15,60,92,4,-3,-85)],[1,p(0,0,15,60,15,60,88,0,-3,-85)]]},
+      cool_catcow:{d:4,a:'h',mat:1,k:[[0,p(72,35,0,0,0,0,0,-90,0,-90,16)],[.5,p(72,-30,0,0,0,0,0,-90,0,-90,-14)],[1,p(72,35,0,0,0,0,0,-90,0,-90,16)]]},
+      rest_breathe:{d:4,bell:'floor',a:'f',k:[[0,p(0,0,6,12,6,12,0,0,-3,0)],[.5,p(0,-4,55,62,55,62,0,0,-3,0)],[1,p(0,0,6,12,6,12,0,0,-3,0)]]}
+    };
+
+    const FLOOR = 192, RAD = Math.PI / 180;
+    const sn = a => Math.sin(a * RAD), cs = a => Math.cos(a * RAD);
+    const SKIN = '#F6C7A3', HAIR = '#3B1F2B', LEG = '#4B2166', LEGB = '#38174F', TOP = '#FFF6FA';
+
+    function poseAt(cfg, t) {
+      const ph = (t % cfg.d) / cfg.d, k = cfg.k; let i = 0;
+      while (i < k.length - 2 && ph >= k[i + 1][0]) i++;
+      const [t0, a] = k[i], [t1, b] = k[i + 1];
+      let u = Math.min(1, Math.max(0, (ph - t0) / ((t1 - t0) || 1)));
+      u = .5 - .5 * Math.cos(Math.PI * u);
+      return a.map((v, j) => v + (b[j] - v) * u);
+    }
+
+    const f1 = n => n.toFixed(1);
+    const path = (pts, w, c) => `<path d="M${pts.map(q => f1(q[0]) + ' ' + f1(q[1])).join('L')}" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`;
+
+    function bellSVG(x, y, ang, w) {
+      return `<g transform="translate(${f1(x)} ${f1(y)}) rotate(${f1(-ang)})">
+        <path d="M-6.5 11V5C-6.5-3 6.5-3 6.5 5V11" stroke="#9D174D" stroke-width="3.6" fill="none" stroke-linecap="round"/>
+        <circle cx="0" cy="21" r="12.5" fill="url(#bellG)" stroke="#BE185D" stroke-width="1"/>
+        <ellipse cx="-4.5" cy="16" rx="3.4" ry="2" fill="#fff" opacity=".5" transform="rotate(-35 -4.5 16)"/>
+        <text transform="translate(0 21) rotate(${f1(ang)})${_fl ? ' scale(-1 1)' : ''}" y="3.6" font-family="Plus Jakarta Sans,sans-serif" font-size="10" font-weight="800" fill="#fff" text-anchor="middle">${w}</text></g>`;
+    }
+
+    function shoe(a, ang, c) {
+      const f = [cs(ang), -sn(ang)], s = [sn(ang), cs(ang)];
+      const p1 = [a[0] + s[0]*3 - f[0]*4, a[1] + s[1]*3 - f[1]*4], p2 = [a[0] + s[0]*5 + f[0]*11, a[1] + s[1]*5 + f[1]*11];
+      const q1 = [p1[0] + s[0]*4.5, p1[1] + s[1]*4.5], q2 = [p2[0] + s[0]*4.5, p2[1] + s[1]*4.5];
+      return path([p1, p2], 9, c) + path([q1, q2], 2.6, '#F43F8E');
+    }
+
+    
+let curW = '♥';
+function drawFig(cfg, P, tt) {
+      const [tr, hd, ua, fa, ub, fb, th, sh, tb, sb, sp, bf] = P;
+      const dn = (a, L) => [L * sn(a), L * cs(a)], up = (a, L) => [L * sn(a), -L * cs(a)];
+      const ad = (a, b) => [a[0] + b[0], a[1] + b[1]];
+      const hip = [0, 0], S = up(tr, 46), H = ad(S, up(tr + hd, 21));
+      const kF = dn(th, 40), aF = ad(kF, dn(sh, 40)), kB = dn(tb, 40), aB = ad(kB, dn(sb, 40));
+      const eF = ad(S, dn(ua, 28)), wF = ad(eF, dn(fa, 26)), eB = ad(S, dn(ub, 28)), wB = ad(eB, dn(fb, 26));
+      const low = Math.max(9, kF[1] + 7, kB[1] + 7, aF[1] + 6, aB[1] + 6, S[1] + 8, H[1] + 10);
+      const ax = (cfg.a === 'b' ? 72 : 112) - (cfg.a === 'f' ? aF[0] : cfg.a === 'b' ? aB[0] : 0), ay = FLOOR - low;
+      const n = [-cs(tr), -sn(tr)], C = [S[0] / 2 + n[0] * sp * 2, S[1] / 2 + n[1] * sp * 2];
+      const sw = sn(tt * 160) * 3;
+      let o = '';
+      o += `<ellipse cx="${f1(ax + (aF[0] + aB[0]) / 2)}" cy="${FLOOR + 3}" rx="56" ry="5" fill="#BE185D" opacity=".16"/>`;
+      if (cfg.mat) o += `<rect x="14" y="${FLOOR}" width="212" height="9" rx="4.5" fill="#F9A8D4"/><rect x="14" y="${FLOOR}" width="212" height="3" rx="1.5" fill="#fff" opacity=".5"/>`;
+      if (cfg.box) o += `<rect x="${cfg.box[0]}" y="${FLOOR - cfg.box[2]}" width="${cfg.box[1]}" height="${cfg.box[2]}" rx="7" fill="#FFE4F0" stroke="#F472B6" stroke-width="2"/><line x1="${cfg.box[0] + 5}" x2="${cfg.box[0] + cfg.box[1] - 5}" y1="${FLOOR - cfg.box[2] + 9}" y2="${FLOOR - cfg.box[2] + 9}" stroke="#F9A8D4" stroke-width="2"/>`;
+      o += `<g transform="translate(${f1(ax)} ${f1(ay)})">`;
+      o += path([S, eB, wB], 7, '#E3A988') + `<circle cx="${f1(wB[0])}" cy="${f1(wB[1])}" r="4" fill="#E3A988"/>`;
+      o += path([hip, kB, aB], 13, LEGB) + shoe(aB, sb, '#F3E8F2');
+      o += `<path d="M0 0Q${f1(C[0])} ${f1(C[1])} ${f1(S[0])} ${f1(S[1])}" stroke="#E58BB3" stroke-width="22" stroke-linecap="round" fill="none"/>`;
+      o += `<path d="M0 0Q${f1(C[0])} ${f1(C[1])} ${f1(S[0])} ${f1(S[1])}" stroke="${TOP}" stroke-width="19" stroke-linecap="round" fill="none"/>`;
+      o += `<circle cx="0" cy="0" r="10.5" fill="${LEG}"/>` + path([hip, kF, aF], 14, LEG) + shoe(aF, sh, '#fff');
+      o += path([S, H], 7, SKIN);
+      o += `<g transform="translate(${f1(H[0])} ${f1(H[1])}) rotate(${f1(tr + hd)})">
+        <path d="M-8-7C-20-9-26 ${f1(2 + sw)}-22 ${f1(14 + sw)}" stroke="${HAIR}" stroke-width="7" stroke-linecap="round" fill="none"/>
+        <circle cx="-9" cy="-7" r="3.2" fill="#F43F8E"/>
+        <circle cx="-2" cy="-2" r="12.6" fill="${HAIR}"/><circle r="11" fill="${SKIN}"/>
+        <path d="M-11-1C-11-13 10-14 11-2C6-8-3-9-11-1Z" fill="${HAIR}"/>
+        <path d="M-10.5-4.5Q0-12.5 10.5-4.5" stroke="#F43F8E" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <circle cx="5.5" cy=".5" r="1.7" fill="#2A1330"/><circle cx="6.5" cy="5.5" r="2.4" fill="#FB7185" opacity=".5"/>
+        <path d="M3.5 6Q6.5 9 9.3 5.6" stroke="#B4506B" stroke-width="1.2" fill="none" stroke-linecap="round"/></g>`;
+      o += path([S, eF, wF], 7, SKIN) + `<circle cx="${f1(wF[0])}" cy="${f1(wF[1])}" r="4.2" fill="${SKIN}"/>`;
+      if (cfg.bell === 'both') o += bellSVG((wF[0] + wB[0]) / 2, (wF[1] + wB[1]) / 2 - 3, bf, curW);
+      else if (cfg.bell === 'f') o += bellSVG(wF[0], wF[1] - 2, fa + bf, curW);
+      else if (cfg.bell === 'b') o += bellSVG(wB[0], wB[1] - 2, fb + bf, curW);
+      else if (cfg.bell === 'alt') { const uB = ub < ua; o += bellSVG(uB ? wB[0] : wF[0], (uB ? wB[1] : wF[1]) - 2, (uB ? fb : fa) + bf, curW); }
+      o += '</g>';
+      if (cfg.bell === 'floor') o += `<g transform="translate(0 ${FLOOR - 33})">${bellSVG(184, 0, 0, curW)}</g>`;
+      return o;
+    }
+
+    
+Object.keys(A2).forEach(k => { if (A[k]) A[k].d = A2[k].d; else A[k] = { d: A2[k].d }; });
+
+const CH = [20,150], LOW = [5,10], ST = [0,0,-3,0];
+A2['oblique_march@3'] = {d:3.6,bell:'both',a:'h',k:[[0,p(0,0,...CH,...CH,...ST)],[.25,p(0,0,...CH,...CH,90,0,-3,0)],[.5,p(0,0,...CH,...CH,...ST)],[.75,p(0,0,...CH,...CH,0,0,90,0)],[1,p(0,0,...CH,...CH,...ST)]]};
+A2['staggered_deadlift@3'] = {d:4.4,bell:'both',a:'f',k:[[0,p(5,0,...LOW,...LOW,0,0,-3,0)],[.5,p(68,-10,4,2,4,2,22,-14,22,-14)],[.62,p(68,-10,4,2,4,2,22,-14,22,-14)],[.82,p(0,0,...CH,...CH,...ST)],[1,p(5,0,...LOW,...LOW,0,0,-3,0)]]};
+A2['bulgarian_lunge@3'] = {d:4.5,bell:'both',a:'f',k:[[0,p(4,0,8,70,8,70,0,0,-3,0)],[.25,p(8,0,8,70,8,70,55,-30,-30,-105)],[.5,p(4,0,8,70,8,70,0,0,-3,0)],[.75,p(8,0,8,70,8,70,-30,-105,55,-30)],[1,p(4,0,8,70,8,70,0,0,-3,0)]]};
+A2['three_point_row@3'] = {d:3.6,bell:'alt',a:'f',k:[[0,p(70,-5,0,0,0,0,22,-14,22,-14)],[.25,p(70,-5,-70,-10,0,0,22,-14,22,-14)],[.5,p(70,-5,0,0,0,0,22,-14,22,-14)],[.75,p(70,-5,0,0,-70,-10,22,-14,22,-14)],[1,p(70,-5,0,0,0,0,22,-14,22,-14)]]};
+A2['shoulder_press@3'] = {d:4,bell:'both',a:'f',k:[[0,p(0,0,...CH,...CH,...ST)],[.4,p(0,-3,172,178,172,178,0,0,-3,0)],[.55,p(0,-3,172,178,172,178,0,0,-3,0)],[1,p(0,0,...CH,...CH,...ST)]]};
+A2['lateral_lunge_press@3'] = {d:4.2,bell:'both',a:'f',k:[[0,p(0,0,...LOW,...LOW,...ST)],[.2,p(18,0,...LOW,...LOW,50,-20,-34,-34)],[.4,p(0,0,...CH,...CH,...ST)],[.6,p(18,0,...LOW,...LOW,-34,-34,50,-20)],[.8,p(0,0,...CH,...CH,...ST)],[1,p(0,0,...LOW,...LOW,...ST)]]};
+
+let _fl = false;
+const V = (b, o) => Object.assign({}, A2[b], o);
+// Right side = figure as drawn (near side); left side = mirrored figure
+A2['staggered_deadlift@1'] = V('staggered_deadlift', {bell:'b'});
+A2['staggered_deadlift@2'] = V('staggered_deadlift', {bell:'b', flip:1});
+A2['bulgarian_lunge@2']    = V('bulgarian_lunge', {flip:1});
+A2['three_point_row@1']    = V('three_point_row', {flip:1});
+A2['shoulder_press@2']     = V('shoulder_press', {flip:1});
+A2['lateral_lunge_press@2']= V('lateral_lunge_press', {flip:1});
+const OM = {d:3.6,bell:'f',a:'h',k:[[0,p(0,0,0,0,10,-5,0,0,-3,0)],[.25,p(10,0,0,0,10,-5,0,0,-3,0)],[.5,p(0,0,0,0,10,-5,0,0,-3,0)],[.75,p(0,0,0,0,10,-5,0,0,90,0)],[1,p(0,0,0,0,10,-5,0,0,-3,0)]]};
+A2['oblique_march@1'] = OM;
+A2['oblique_march@2'] = V('oblique_march', {}) && Object.assign({}, OM, {flip:1});
+let _ld = 0;
+window.setAnim = function (type, w) {
+  const _st = TIMELINE[currentIndex], _k = (type || 'rest_breathe');
+  currentAnimType = (_st && _st.round && A2[_k + '@' + _st.round]) ? _k + '@' + _st.round : _k;
+  currentBellWeight = w || '♥'; curW = currentBellWeight;
+  _ld = 0; window.renderAnimFrame(0);
+  const fig = document.getElementById('fig');
+  if (fig) { fig.style.opacity = '0'; requestAnimationFrame(() => { fig.style.opacity = '1'; }); }
+};
+window.renderAnimFrame = function (now) {
+  const fig = document.getElementById('fig'); if (!fig) return;
+  if (now && now - _ld < 28) return; _ld = now;
+  const cfg = A2[currentAnimType] || A2.rest_breathe, tt = Math.max(0, (now - animT0) / 1000);
+  _fl = !!cfg.flip;
+  const g = drawFig(cfg, poseAt(cfg, tt % cfg.d), tt);
+  fig.innerHTML = _fl ? '<g transform="translate(240 0) scale(-1 1)">' + g + '</g>' : g;
+};
+})();
+setAnim(currentAnimType, currentBellWeight);
+</script>
+
+<script>
+// ===== v4: groove music, get-ready, session restore, catch-up, rating =====
+(function () {
+  const $id = x => document.getElementById(x);
+  const toast = t => { const e = document.createElement('div'); e.className = 'toast'; e.textContent = t; document.body.appendChild(e); setTimeout(() => e.remove(), 3800); };
+
+  // ---- Groovier music that follows the phase ----
+  let _mN = 0, _mS = 0, _nb = null;
+  const CH = [[110,220,261.63,329.63],[87.31,174.61,220,261.63],[130.81,261.63,329.63,392],[98,246.94,293.66,392]];
+  const noise = () => { if (!_nb) { const b = audioCtx.createBuffer(1, audioCtx.sampleRate, audioCtx.sampleRate), d = b.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; _nb = b; } return _nb; };
+  const env = (g, t, a, pk, r) => { g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(pk, t + a); g.gain.exponentialRampToValueAtTime(0.0001, t + a + r); };
+  const out = g => g.connect(musicMasterGain);
+  function kick(t, v) { const o = audioCtx.createOscillator(), g = audioCtx.createGain(); o.frequency.setValueAtTime(170, t); o.frequency.exponentialRampToValueAtTime(48, t + .12); env(g, t, .004, .9 * v, .26); o.connect(g); out(g); o.start(t); o.stop(t + .32); }
+  function nz(t, type, f, q, v, dur) { const s = audioCtx.createBufferSource(), fl = audioCtx.createBiquadFilter(), g = audioCtx.createGain(); s.buffer = noise(); fl.type = type; fl.frequency.value = f; fl.Q.value = q; env(g, t, .002, v, dur); s.connect(fl); fl.connect(g); out(g); s.start(t, Math.random() * .5); s.stop(t + dur + .05); }
+  function bass(t, f, d, v) { const o = audioCtx.createOscillator(), o2 = audioCtx.createOscillator(), fl = audioCtx.createBiquadFilter(), g = audioCtx.createGain(); o.type = 'sawtooth'; o2.type = 'sine'; o.frequency.value = f; o2.frequency.value = f; fl.type = 'lowpass'; fl.frequency.value = 380; env(g, t, .01, v, d); o.connect(fl); o2.connect(fl); fl.connect(g); out(g); o.start(t); o2.start(t); o.stop(t + d + .1); o2.stop(t + d + .1); }
+  function pad(t, fs, d, v) { fs.forEach(f => [-6, 6].forEach(c => { const o = audioCtx.createOscillator(), fl = audioCtx.createBiquadFilter(), g = audioCtx.createGain(); o.type = 'sawtooth'; o.frequency.value = f; o.detune.value = c; fl.type = 'lowpass'; fl.frequency.value = 1100; g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(v, t + .35); g.gain.setTargetAtTime(0.0001, t + d - .3, .25); o.connect(fl); fl.connect(g); out(g); o.start(t); o.stop(t + d + 1); })); }
+  function pluck(t, f, v) { const o = audioCtx.createOscillator(), fl = audioCtx.createBiquadFilter(), g = audioCtx.createGain(); o.type = 'triangle'; o.frequency.value = f; fl.type = 'lowpass'; fl.frequency.setValueAtTime(2600, t); fl.frequency.exponentialRampToValueAtTime(500, t + .25); env(g, t, .005, v, .28); o.connect(fl); fl.connect(g); out(g); o.start(t); o.stop(t + .4); }
+  window.scheduleMusicBeat = function () {
+    if (!audioCtx || !musicMasterGain || !isRunning || !audioPrefs.music) return;
+    const type = (TIMELINE[currentIndex] || {}).type || 'work';
+    if (!_mN || _mN < audioCtx.currentTime) _mN = audioCtx.currentTime + .06;
+    const bpm = type === 'work' ? 112 : type === 'warmup' ? 100 : type === 'rest' ? 90 : 72;
+    const work = type === 'work', warm = type === 'warmup', rest = type === 'rest';
+    while (_mN < audioCtx.currentTime + .9) {
+      const s = _mS % 16, c = CH[Math.floor(_mS / 16) % 4], t = _mN, sd = 60 / bpm / 4;
+      if ((work || warm) && s % 4 === 0) kick(t, work ? 1 : .6);
+      if (work && (s === 4 || s === 12)) nz(t, 'bandpass', 1700, .9, .32, .16);
+      if ((work || warm) && s % 4 === 2) nz(t, 'highpass', 7500, .7, work ? .11 : .07, .05);
+      if (work && s % 2 === 1) nz(t, 'highpass', 8000, .7, .04, .03);
+      if (rest && (s === 2 || s === 10)) nz(t, 'highpass', 7500, .7, .05, .05);
+      if (work && [0, 3, 6, 10].includes(s)) bass(t, c[0], sd * 2.2, .4);
+      if (warm && (s === 0 || s === 8)) bass(t, c[0], sd * 5, .3);
+      if (rest && s === 0) bass(t, c[0], sd * 12, .25);
+      if (s === 0) pad(t, c.slice(1), sd * 16, work ? .03 : warm ? .035 : rest ? .04 : .05);
+      if (work && s % 2 === 0) pluck(t, c[1 + (s / 2 | 0) % 3] * 2, .07);
+      else if (warm && s % 4 === 0) pluck(t, c[1 + (s / 4 | 0) % 3] * 2, .06);
+      else if (rest && s % 8 === 0) pluck(t, c[2] * 2, .05);
+      else if (!work && !warm && !rest && s % 8 === 0) pluck(t, c[1 + (s / 8 | 0) % 3] * 2, .06);
+      _mN += sd; _mS++;
+    }
+  };
+
+  // ---- Fast-forward quietly after the phone slept ----
+  let _quiet = false, _lastTick = Date.now();
+  ['speakCoach', 'playSoundCue', 'triggerHaptic'].forEach(n => { const f = window[n]; window[n] = function () { if (_quiet) return; return f.apply(this, arguments); }; });
+  const _tk = tick;
+  tick = function () { _lastTick = Date.now(); _tk(); };
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState !== 'visible' || !isRunning) return;
+    const gap = Math.floor((Date.now() - _lastTick) / 1000) - 1;
+    if (gap < 2) return;
+    const i0 = currentIndex; _quiet = true;
+    try { for (let k = 0; k < gap && isRunning; k++) _tk(); } finally { _quiet = false; }
+    _lastTick = Date.now();
+    if (isRunning && currentIndex !== i0) speakCurrentStepStart();
+  });
+
+  // ---- 5-second get-ready before the very first start ----
+  let _lead = null;
+  const leadEl = () => { let e = $id('leadIn'); if (!e) { e = document.createElement('div'); e.id = 'leadIn'; e.innerHTML = '<span>GET READY</span><b></b>'; document.body.appendChild(e); } return e; };
+  const leadStop = () => { if (_lead) { clearInterval(_lead); _lead = null; leadEl().classList.remove('on'); } };
+  const _tp3 = togglePlay;
+  togglePlay = function () {
+    if (_lead) { leadStop(); stopVoice(); return; }
+    if (!isRunning && currentIndex === 0 && remainingSec === TIMELINE[0].duration) {
+      initAudio(); triggerHaptic(18);
+      let n = 5; const el = leadEl(), num = el.querySelector('b'); num.textContent = n; el.classList.add('on');
+      speakCoach('Get ready. Five.');
+      _lead = setInterval(() => {
+        n--;
+        if (n <= 0) { leadStop(); _tp3(); return; }
+        num.textContent = n; speakCoach(COUNTDOWN_WORDS[n]);
+      }, 1000);
+      return;
+    }
+    _tp3();
+  };
+
+  // ---- Session restore ----
+  const KEY = 'kbp_session_v1';
+  const save = () => { try { if (currentIndex > 0 || remainingSec < TIMELINE[currentIndex].duration) localStorage.setItem(KEY, JSON.stringify({ i: currentIndex, r: remainingSec, d: [...completedSteps], day: selectedDayIdx, tm: selectedTimeStr, t: Date.now(), n: TIMELINE.length })); } catch (e) {} };
+  const clear = () => { try { localStorage.removeItem(KEY); } catch (e) {} };
+  try {
+    const q = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (q && q.n === TIMELINE.length && Date.now() - q.t < 3 * 3600e3 && q.i >= 0 && q.i < TIMELINE.length) {
+      currentIndex = q.i; remainingSec = Math.min(q.r, TIMELINE[q.i].duration); (q.d || []).forEach(x => completedSteps.add(x));
+      if (q.day !== undefined) selectedDayIdx = q.day; if (q.tm) selectedTimeStr = q.tm;
+      window._restored = true;
+      window.addEventListener('load', () => setTimeout(() => toast('Welcome back — tap Resume to continue'), 600));
+    } else if (q) clear();
+  } catch (e) {}
+  const _oc = openCheckInModal;
+  openCheckInModal = function (a) { if (!a && window._restored) { window._restored = false; return; } _oc(a); };
+  setInterval(save, 2000);
+  window.addEventListener('pagehide', save);
+  const _rw = resetWorkout; resetWorkout = function () { clear(); _rw.apply(this, arguments); };
+
+  // ---- Lifetime stats (persist across week resets: sessions, time, streak) ----
+  const LIFETIME_KEY = 'kbp_lifetime_v1';
+  function loadLifetimeStats() {
+    try {
+      const raw = JSON.parse(localStorage.getItem(LIFETIME_KEY));
+      if (raw && typeof raw === 'object') return Object.assign({ sessions: 0, totalSec: 0, streak: 0, bestStreak: 0, lastDate: null }, raw);
+    } catch (e) {}
+    return { sessions: 0, totalSec: 0, streak: 0, bestStreak: 0, lastDate: null };
+  }
+  function saveLifetimeStats(s) { try { localStorage.setItem(LIFETIME_KEY, JSON.stringify(s)); } catch (e) {} }
+  function recordLifetimeCompletion() {
+    const s = loadLifetimeStats();
+    const now = new Date();
+    const todayKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+    if (s.lastDate !== todayKey) {
+      const diffDays = s.lastDate ? Math.round((new Date(todayKey) - new Date(s.lastDate)) / 86400000) : null;
+      s.streak = diffDays === 1 ? (s.streak || 0) + 1 : 1;
+      s.bestStreak = Math.max(s.bestStreak || 0, s.streak);
+      s.lastDate = todayKey;
+    }
+    s.sessions = (s.sessions || 0) + 1;
+    s.totalSec = (s.totalSec || 0) + TOTAL_SESSION_SECONDS;
+    saveLifetimeStats(s);
+    return s;
+  }
+  const _rc = recordCompletedWorkout; recordCompletedWorkout = function () { clear(); recordLifetimeCompletion(); _rc.apply(this, arguments); };
+
+  // ---- How did it feel? (1-5), plus lifetime streak/sessions ----
+  const _ocs3 = openCompletionSummary;
+  openCompletionSummary = function () {
+    _ocs3();
+    const st = $id('completeStats'); if (!st) return;
+    const oldLt = $id('lifetimeRow'); if (oldLt) oldLt.remove();
+    const ls = loadLifetimeStats();
+    const ltRow = document.createElement('div'); ltRow.id = 'lifetimeRow'; ltRow.className = 'rate';
+    const totalHrs = (ls.totalSec / 3600).toFixed(1);
+    ltRow.innerHTML = `<span>🔥 ${ls.streak}-day streak · ${ls.sessions} sessions · ${totalHrs}h lifetime</span>`;
+    st.insertAdjacentElement('afterend', ltRow);
+    const old = $id('rateRow'); if (old) old.remove();
+    const row = document.createElement('div'); row.id = 'rateRow'; row.className = 'rate';
+    const cur = (loadWeeklyData().days[selectedDayIdx] || {}).rating || 0;
+    row.innerHTML = '<span>How did it feel?</span>' + [1, 2, 3, 4, 5].map(n => '<button data-n="' + n + '" class="' + (n <= cur ? 'on' : '') + '" aria-label="' + n + ' stars">★</button>').join('');
+    row.addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b) return;
+      const n = +b.dataset.n, d = loadWeeklyData();
+      if (d.days[selectedDayIdx]) { d.days[selectedDayIdx].rating = n; saveWeeklyData(d); }
+      row.querySelectorAll('button').forEach((x, i) => x.classList.toggle('on', i < n)); triggerHaptic(12);
+    });
+    ltRow.insertAdjacentElement('afterend', row);
+  };
+})();
+</script>
+</body>
+</html>
