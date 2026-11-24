@@ -195,7 +195,7 @@ body::before{display:none}
 .rate{display:flex;align-items:center;justify-content:center;gap:6px;margin:10px 0 2px;font-size:12px;font-weight:700;color:var(--mute)}
 .rate button{border:0;background:none;font-size:26px;line-height:1;color:#F9C6DC;padding:2px;transition:transform .25s cubic-bezier(.3,1.5,.5,1),color .2s}.rate button.on{color:#EC4899}.rate button:active{transform:scale(.85)}
 #leadIn{position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle,rgba(255,228,240,.96),rgba(255,214,232,.9));opacity:0;pointer-events:none;transition:opacity .3s}
-#leadIn.on{opacity:1}#leadIn b{font-size:110px;line-height:1;color:var(--ac);animation:lead 1s ease-out infinite}#leadIn span{font-weight:800;color:var(--ink);letter-spacing:.04em}
+#leadIn.on{opacity:1;pointer-events:auto}#leadIn b{font-size:110px;line-height:1;color:var(--ac);animation:lead 1s ease-out infinite}#leadIn span{font-weight:800;color:var(--ink);letter-spacing:.04em}
 @keyframes lead{0%{transform:scale(.6);opacity:0}30%{transform:scale(1.08);opacity:1}100%{transform:scale(1);opacity:.9}}
 .toast{position:fixed;left:50%;bottom:calc(var(--sb) + 112px);transform:translateX(-50%);background:#2A1330;color:#fff;padding:10px 16px;border-radius:14px;font-size:13px;font-weight:700;z-index:80;animation:up .4s cubic-bezier(.32,.72,0,1);display:flex;align-items:center;gap:10px;white-space:nowrap}
 .toast button{background:var(--ac);color:#fff;padding:5px 11px;border-radius:9px;font-size:12px;font-weight:800;flex:none}
@@ -1820,6 +1820,7 @@ function _localVoice() {
   const l = speechSynthesis.getVoices().filter(v => v.localService && /^en/i.test(v.lang) && !/(david|mark|alex|daniel|fred|tom|aaron|arthur|oliver|rishi)/i.test(v.name));
   return l.find(v => /(zira|samantha|ava|zoe|allison|susan|karen|moira|tessa|serena|nicky|female)/i.test(v.name)) || l[0] || null;
 }
+let _wps = 2.5;   // adaptive words-per-second estimate for voice-line timing, refined in _vNext as lines actually play
 const _est = p => p.t.split(' ').length / (_wps * p.r) + p.g / 1000;
 function _vNext(t) {
   if (t !== _vt) return;
@@ -2206,7 +2207,7 @@ setAnim(currentAnimType, currentBellWeight);
 
   // ---- 5-second get-ready before the very first start ----
   let _lead = null;
-  const leadEl = () => { let e = $id('leadIn'); if (!e) { e = document.createElement('div'); e.id = 'leadIn'; e.innerHTML = '<span>GET READY</span><b></b>'; document.body.appendChild(e); } return e; };
+  const leadEl = () => { let e = $id('leadIn'); if (!e) { e = document.createElement('div'); e.id = 'leadIn'; e.innerHTML = '<span>GET READY</span><b></b>'; e.addEventListener('click', () => { if (_lead) { leadStop(); stopVoice(); } }); document.body.appendChild(e); } return e; };
   const leadStop = () => { if (_lead) { clearInterval(_lead); _lead = null; leadEl().classList.remove('on'); } };
   const _tp3 = togglePlay;
   togglePlay = function () {

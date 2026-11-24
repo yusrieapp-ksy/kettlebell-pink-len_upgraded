@@ -109,7 +109,7 @@ All reads/writes are wrapped in `try/catch` so the app degrades gracefully if `l
 All 4 modal dialogs (`timelineModal`, `installModal`, `completeModal`, `checkInModal`) carry `role="dialog"`, `aria-modal="true"`, and `aria-labelledby` pointing at their heading. The timer's countdown number is `aria-hidden` (would spam screen readers every second); the timer status text and exercise title are `aria-live="polite"` so meaningful state/step changes are announced without second-by-second noise. The "Up Next" text visually flashes (`.flash` class) at the same 20-second mark the voice coach announces it, giving sound-off users the same cue.
 
 ### 5.9 Service worker & update flow
-`sw.js` precaches the 8 app files on install, serves cached copies offline, and always tries network-first for navigations (falling back to cache). `index.html` listens for `controllerchange` on `navigator.serviceWorker` and shows a persistent **"App updated"** toast with a **Refresh** button — it deliberately does **not** auto-reload, so an in-progress workout is never interrupted. Bumping the `CACHE` constant in `sw.js` (currently `kettlebellpink-v6`) is what triggers this flow for existing installs — see §2.
+`sw.js` precaches the 8 app files on install, serves cached copies offline, and always tries network-first for navigations (falling back to cache). `index.html` listens for `controllerchange` on `navigator.serviceWorker` and shows a persistent **"App updated"** toast with a **Refresh** button — it deliberately does **not** auto-reload, so an in-progress workout is never interrupted. Bumping the `CACHE` constant in `sw.js` (currently `kettlebellpink-v7`) is what triggers this flow for existing installs — see §2.
 
 
 ---
@@ -132,6 +132,10 @@ Motion is deliberately differentiated between work and rest: the ring's pulsing 
 ## 7. Change history (chronological, most recent first)
 
 > Kept here as a running log so future edits have context on *why* things are the way they are. Add a new entry at the top when you make further changes.
+
+**Nov 2026 — Critical fix: workout wouldn't start** (`sw.js` → v7)
+- **Bug fix:** tapping "Start Workout" froze on the "GET READY" countdown overlay at **5** and never advanced — the app was completely unusable. Root cause: `_wps` (words-per-second, used by the voice-timing helper `_est()`) was referenced and mutated in the v3-upgrades script block but **never declared anywhere** in the file. The very first countdown call, `speakCoach('Get ready. Five.')`, has 2 sentences, which routes through the budget-fitting branch that calls `_est()` — throwing an uncaught `ReferenceError` that silently aborted `togglePlay()` *before* the line that creates the countdown's `setInterval`. Fixed by declaring `let _wps = 2.5;` (a sensible default words/sec) right before its first use; the adaptive logic in `_vNext()` that refines it over time was already correct and untouched.
+- Hardening: the "GET READY" overlay (`#leadIn`) had `pointer-events:none`, so any tap during the countdown silently leaked through to the Play/Prev/Next buttons underneath instead of being caught by the overlay's own cancel handling. Changed to `pointer-events:auto` only while `.on` (visible), and added an explicit click handler on the overlay that cancels the countdown cleanly (reusing the same cancel logic already in `togglePlay`) — this was not the root cause, but prevents a similar "nothing visibly happens" dead end in the future.
 
 **Nov 2026 — Polish round 2** (`sw.js` → v6)
 - Rest-phase rhythm: tempo dot now pulses 1.4x slower with a softer scale swing during rest, layered on the pre-existing slower aura.
