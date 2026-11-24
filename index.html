@@ -1803,6 +1803,7 @@ body::before{display:none}
 try { if (!localStorage.getItem(AUDIO_PREFS_KEY)) audioPrefs.musicLevel = 'med'; } catch (e) {}
 
 // ---- Natural female coach voice: phrase-by-phrase delivery ----
+let _vq = [], _vPlaying = false, _vPending = false, _vt = 0, _vRefs = null;
 const _busy = () => _vPlaying || _vPending;
 function _phr(text) {
   const out = [];
